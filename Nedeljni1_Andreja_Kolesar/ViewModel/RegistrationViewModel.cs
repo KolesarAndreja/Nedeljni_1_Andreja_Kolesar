@@ -1,4 +1,5 @@
 ﻿using Nedeljni1_Andreja_Kolesar.Command;
+using Nedeljni1_Andreja_Kolesar.Service;
 using Nedeljni1_Andreja_Kolesar.View;
 using System;
 using System.Collections.Generic;
@@ -14,88 +15,217 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
     {
         #region Prop
         Registration registration;
-        //private tblUser _newUser;
-        //public tblUser newUser
-        //{
-        //    get
-        //    {
-        //        return _newUser;
-        //    }
-        //    set
-        //    {
-        //        _newUser = value;
-        //        OnPropertyChanged("newUser");
-        //    }
-        //}
+        private tblUser _newUser;
+        public tblUser newUser
+        {
+            get
+            {
+                return _newUser;
+            }
+            set
+            {
+                _newUser = value;
+                OnPropertyChanged("newUser");
+            }
+        }
 
-        //private tblDoctor _newDoctor;
-        //public tblDoctor newDoctor
-        //{
-        //    get
-        //    {
-        //        return _newDoctor;
-        //    }
-        //    set
-        //    {
-        //        _newDoctor = value;
-        //        OnPropertyChanged("newDoctor");
-        //    }
-        //}
+        private tblManager _newManager;
+        public tblManager newManager
+        {
+            get
+            {
+                return _newManager;
+            }
+            set
+            {
+                _newManager = value;
+                OnPropertyChanged("newManager");
+            }
+        }
 
-        //private tblPatient _newPatient;
-        //public tblPatient newPatient
-        //{
-        //    get
-        //    {
-        //        return _newPatient;
-        //    }
-        //    set
-        //    {
-        //        _newPatient = value;
-        //        OnPropertyChanged("newPatient");
-        //    }
-        //}
+        private tblEmployee _newEmployee;
+        public tblEmployee newEmployee
+        {
+            get
+            {
+                return _newEmployee;
+            }
+            set
+            {
+                _newEmployee = value;
+                OnPropertyChanged("newEmployee");
+            }
+        }
+        #endregion
 
-        //private List<vwDoctor> _doctorList;
-        //public List<vwDoctor> doctorList
-        //{
-        //    get
-        //    {
-        //        return _doctorList;
-        //    }
-        //    set
-        //    {
-        //        _doctorList = value;
-        //        OnPropertyChanged("doctorList");
-        //    }
-        //}
+        #region list props
+        private List<tblGender> _genderList;
+        public List<tblGender> genderList
+        {
+            get
+            {
+                return _genderList;
+            }
+            set
+            {
+                _genderList = value;
+                OnPropertyChanged("genderList");
+            }
+        }
+
+        private List<tblMarriageStatu> _maritalList;
+        public List<tblMarriageStatu> maritalList
+        {
+            get
+            {
+                return _maritalList;
+            }
+            set
+            {
+                _maritalList = value;
+                OnPropertyChanged("maritalList");
+            }
+        }
+
+        private List<tblSector> _sectorList;
+        public List<tblSector> sectorList
+        {
+            get
+            {
+                return _sectorList;
+            }
+            set
+            {
+                _sectorList = value;
+                OnPropertyChanged("sectorList");
+            }
+        }
+
+        private List<tblPosition> _positionList;
+        public List<tblPosition> positionList
+        {
+            get
+            {
+                return _positionList;
+            }
+            set
+            {
+                _positionList = value;
+                OnPropertyChanged("positionList");
+            }
+        }
 
 
+        private List<tblProfessionalQualification> _qualificationList;
+        public List<tblProfessionalQualification> qualificationList
+        {
+            get
+            {
+                return _qualificationList;
+            }
+            set
+            {
+                _qualificationList = value;
+                OnPropertyChanged("qualificationList");
+            }
+        }
+        #endregion
 
-        //private vwDoctor _selectedDoctor;
-        //public vwDoctor selectedDoctor
-        //{
-        //    get
-        //    {
-        //        return _selectedDoctor;
-        //    }
-        //    set
-        //    {
-        //        _selectedDoctor = value;
-        //        OnPropertyChanged("selectedDoctor");
-        //    }
-        //}
+        #region selected items
+        private tblGender _selectedGender;
+        public tblGender selectedGender
+        {
+            get
+            {
+                return _selectedGender;
+            }
+            set
+            {
+                _selectedGender = value;
+                OnPropertyChanged("selectedGender");
+            }
+        }
+
+        private tblMarriageStatu _selectedMarital;
+        public tblMarriageStatu selectedMarital
+        {
+            get
+            {
+                return _selectedMarital;
+            }
+            set
+            {
+                _selectedMarital = value;
+                OnPropertyChanged("selectedMarital");
+            }
+        }
+
+        private tblSector _selectedSector;
+        public tblSector selectedSector
+        {
+            get
+            {
+                return _selectedSector;
+            }
+            set
+            {
+                _selectedSector = value;
+                OnPropertyChanged("selectedSector");
+            }
+        }
+
+        private tblPosition _selectedPosition;
+        public tblPosition selectedPosition
+        {
+            get
+            {
+                return _selectedPosition;
+            }
+            set
+            {
+                _selectedPosition = value;
+                OnPropertyChanged("selectedPosition");
+            }
+        }
+
+        private tblProfessionalQualification _selectedQualification;
+        public tblProfessionalQualification selectedQualification
+        {
+            get
+            {
+                return _selectedQualification;
+            }
+            set
+            {
+                _selectedQualification = value;
+                OnPropertyChanged("selectedQualification");
+            }
+        }
         #endregion
 
         #region constructor
         public RegistrationViewModel(Registration open)
         {
             registration = open;
-            //newUser = new tblUser();
-            //newDoctor = new tblDoctor();
-            //newPatient = new tblPatient();
-            //selectedDoctor = new vwDoctor();
-            //doctorList = Service.Service.GetDoctorsList();
+            newUser = new tblUser();
+            newManager = new tblManager();
+            newEmployee = new tblEmployee();
+            //gender
+            selectedGender = new tblGender();
+            genderList = Service.Service.GetGenderList();
+            //sector
+            selectedSector = new tblSector();
+            sectorList = Service.Service.GetSectorList();
+            //marital status
+            selectedMarital = new tblMarriageStatu();
+            maritalList = Service.Service.GetMaritalStatusList();
+            //position
+            selectedPosition = new tblPosition();
+            positionList = Service.Service.GetPositionList();
+            //qualification
+            selectedQualification = new tblProfessionalQualification();
+            qualificationList = Service.Service.GetQualificationList();
+            
         }
         #endregion
 
@@ -195,7 +325,7 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
 
             try
             {
-                //if (doctorList.Count == 0)
+                //if (genderList.Count == 0)
                 //{
                 //    MessageBox.Show("It is impossible to register a patient at this time as there are no registered doctors");
                 //}
@@ -242,7 +372,7 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
             {
                 //tblUser u = Service.Service.AddUser(newUser);
                 //newPatient.userId = u.userId;
-                //newPatient.doctorId = selectedDoctor.doctorId;
+                //newPatient.doctorId = selectedGender.doctorId;
                 //tblPatient p = Service.Service.AddPatient(newPatient);
 
                 //if (u != null && p != null)
@@ -260,7 +390,7 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
 
         private bool CanSaveExecute()
         {
-            //if (!String.IsNullOrEmpty(newUser.fullname) && !String.IsNullOrEmpty(newUser.JMBG) && !String.IsNullOrEmpty(newUser.username) && !String.IsNullOrEmpty(newUser.password) && !String.IsNullOrEmpty(newPatient.cardNumber) && selectedDoctor.doctorId != 0)
+            //if (!String.IsNullOrEmpty(newUser.fullname) && !String.IsNullOrEmpty(newUser.JMBG) && !String.IsNullOrEmpty(newUser.username) && !String.IsNullOrEmpty(newUser.password) && !String.IsNullOrEmpty(newPatient.cardNumber) && selectedGender.doctorId != 0)
             //{
             //    return true;
             //}
@@ -289,8 +419,8 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
             try
             {
                 //tblUser u = Service.Service.AddUser(newUser);
-                //newDoctor.userId = u.userId;
-                //tblDoctor p = Service.Service.AddDoctor(newDoctor);
+                //newManager.userId = u.userId;
+                //tblDoctor p = Service.Service.AddDoctor(newManager);
 
                 //if (u != null && p != null)
                 //{
@@ -306,7 +436,7 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
 
         private bool CanSave2Execute()
         {
-            //if (!String.IsNullOrEmpty(newUser.fullname) && !String.IsNullOrEmpty(newUser.JMBG) && !String.IsNullOrEmpty(newUser.username) && !String.IsNullOrEmpty(newUser.password) && !String.IsNullOrEmpty(newDoctor.account))
+            //if (!String.IsNullOrEmpty(newUser.fullname) && !String.IsNullOrEmpty(newUser.JMBG) && !String.IsNullOrEmpty(newUser.username) && !String.IsNullOrEmpty(newUser.password) && !String.IsNullOrEmpty(newManager.account))
             //{
             //    return true;
             //}

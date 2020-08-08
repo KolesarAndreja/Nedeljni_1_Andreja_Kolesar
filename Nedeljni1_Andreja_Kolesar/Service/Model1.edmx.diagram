@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="886a6e69f8774d06b7e1615fcaf96199" Name="Diagram1">
+        <EntityTypeShape EntityType="dbFirmModel.tblAdministrator" Width="1.5" PointX="5.25" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmModel.tblAdminType" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmModel.tblDailyReport" Width="1.5" PointX="9.75" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmModel.tblEditRequest" Width="1.5" PointX="9.75" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmModel.tblEmployee" Width="1.5" PointX="7.5" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmModel.tblGender" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmModel.tblManager" Width="1.5" PointX="5.25" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmModel.tblMarriageStatu" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmModel.tblPosition" Width="1.5" PointX="5.25" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmModel.tblProfessionalQualification" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmModel.tblProject" Width="1.5" PointX="12.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmModel.tblSector" Width="1.5" PointX="5.25" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmModel.tblUser" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmModel.vwAdministrator" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmModel.vwEmployee" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbFirmModel.vwManager" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="dbFirmModel.FK__tblAdmini__admin__5E74FADA" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmModel.FK__tblAdmini__userI__5F691F13" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmModel.FK__tblDailyR__emplo__6BCEF5F8" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmModel.FK__tblDailyR__proje__6CC31A31" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmModel.FK__tblEditRe__emplo__59B045BD" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmModel.FK__tblEmploy__manag__56D3D912" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmModel.FK__tblEmploy__posit__54EB90A0" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmModel.FK__tblEmploy__quali__55DFB4D9" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmModel.FK__tblEmploy__secto__53F76C67" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmModel.FK__tblEmploy__userI__5303482E" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmModel.FK__tblProjec__emplo__642DD430" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmModel.FK__tblProjec__emplo__6521F869" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmModel.FK__tblProjec__emplo__66161CA2" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmModel.FK__tblProjec__emplo__670A40DB" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmModel.FK__tblProjec__emplo__67FE6514" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmModel.FK__tblUser__genderI__43C1049E" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmModel.FK__tblManage__userI__5026DB83" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmModel.FK__tblProjec__contr__62458BBE" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmModel.FK__tblProjec__leade__6339AFF7" ManuallyRouted="false" />
+        <AssociationConnector Association="dbFirmModel.FK__tblUser__marriag__44B528D7" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
