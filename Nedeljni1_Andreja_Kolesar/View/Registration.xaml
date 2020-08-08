@@ -26,6 +26,7 @@
                 Width="130" />
         <Button Content="Manager Registration"
                 Command="{Binding createManager, UpdateSourceTrigger=PropertyChanged}"
+                Visibility="{Binding buttonViewManager, UpdateSourceTrigger=PropertyChanged}"
                 HorizontalAlignment="Left"
                 Height="25"
                 Margin="225,23,0,0"

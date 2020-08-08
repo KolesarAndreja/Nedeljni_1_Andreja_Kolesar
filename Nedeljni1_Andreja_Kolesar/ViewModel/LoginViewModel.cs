@@ -1,10 +1,8 @@
 ﻿using Nedeljni1_Andreja_Kolesar.Command;
+using Nedeljni1_Andreja_Kolesar.Model;
 using Nedeljni1_Andreja_Kolesar.View;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
 
@@ -13,24 +11,20 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
     class LoginViewModel:ViewModelBase
     {
         Login login;
-        //private tblUser _currentUser;
-        //public tblUser currentUser
-        //{
-        //    get
-        //    {
-        //        return _currentUser;
-        //    }
-        //    set
-        //    {
-        //        _currentUser = value;
-        //        OnPropertyChanged("currentUser");
-        //    }
-        //}
+        private int counter=0;
+
+        #region constructor
         public LoginViewModel(Login openLogin)
         {
             login = openLogin;
+            counter++;
+            if (counter == 1)
+            {
+                Startup start = new Startup();
+            }
             //currentUser = new tblUser();
         }
+        #endregion
 
         #region Commands
         private ICommand _loginBtn;

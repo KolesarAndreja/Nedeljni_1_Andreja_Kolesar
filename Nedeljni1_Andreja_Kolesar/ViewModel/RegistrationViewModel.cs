@@ -230,6 +230,20 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
         #endregion
 
         #region Visibility
+        private Visibility _buttonViewManager = Visibility.Visible;
+        public Visibility buttonViewManager
+        {
+            get
+            {
+                return _buttonViewManager;
+            }
+            set
+            {
+                _buttonViewManager = value;
+                OnPropertyChanged("buttonViewManager");
+            }
+        }
+
         private Visibility _viewUser = Visibility.Collapsed;
         public Visibility viewUser
         {
@@ -288,13 +302,27 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
 
             try
             {
-
-                if (viewEmployee == Visibility.Visible)
+                MessageBoxResult result = MessageBox.Show("Do you realy want to register a manager?", "Manager registration", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
                 {
-                    viewEmployee = Visibility.Collapsed;
+                    ManagerAccess access = new ManagerAccess();
+                    access.ShowDialog();
+                    if ((access.DataContext as ManagerAccessViewModel).isSuccessful == true)
+                    {
+                        if (viewEmployee == Visibility.Visible)
+                        {
+                            viewEmployee = Visibility.Collapsed;
+                        }
+                        viewUser = Visibility.Visible;
+                        viewManager = Visibility.Visible;
+                    }
+                    else
+                    {
+                        buttonViewManager = Visibility.Hidden;
+                    }
+                   
                 }
-                viewUser = Visibility.Visible;
-                viewManager = Visibility.Visible;
+                
             }
             catch (Exception ex)
             {
@@ -325,19 +353,27 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
 
             try
             {
-                //if (genderList.Count == 0)
-                //{
-                //    MessageBox.Show("It is impossible to register a patient at this time as there are no registered doctors");
-                //}
-                //else
-                //{
-                    if (viewManager == Visibility.Visible)
+                List<tblManager> allManagers = Service.Service.GetManagerList();
+                if(allManagers.Count == 0)
+                {
+                    MessageBox.Show("It is impossible to register an employee at this time as there are no registered managers.");
+                }
+                else 
+                {
+                    if (sectorList.Count == 0)
                     {
-                        viewManager = Visibility.Hidden;
+                        MessageBox.Show("It is impossible to register an employee at this time as there are no available sectors.");
                     }
-                    viewUser = Visibility.Visible;
-                    viewEmployee = Visibility.Visible;
-                //}
+                    else
+                    {
+                        if (viewManager == Visibility.Visible)
+                        {
+                            viewManager = Visibility.Hidden;
+                        }
+                        viewUser = Visibility.Visible;
+                        viewEmployee = Visibility.Visible;
+                    }
+                }
             }
             catch (Exception ex)
             {

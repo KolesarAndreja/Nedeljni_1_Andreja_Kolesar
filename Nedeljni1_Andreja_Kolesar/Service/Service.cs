@@ -102,6 +102,24 @@ namespace Nedeljni1_Andreja_Kolesar.Service
             }
         }
 
+        public static List<tblManager> GetManagerList()
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    List<tblManager> list = new List<tblManager>();
+                    list = (from x in context.tblManagers select x).ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
+
         #endregion
     }
 }
