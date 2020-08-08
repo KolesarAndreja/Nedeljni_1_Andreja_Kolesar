@@ -1,0 +1,317 @@
+﻿<Window x:Class="Nedeljni1_Andreja_Kolesar.View.Registration"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Validation="clr-namespace:Nedeljni1_Andreja_Kolesar.Validation"
+        xmlns:local="clr-namespace:Nedeljni1_Andreja_Kolesar.View"
+        mc:Ignorable="d"
+        Title="Registration"
+        Height="700"
+        Width="600">
+    <Grid>
+        <Button Content="Close"
+                Command="{Binding logOut, UpdateSourceTrigger=PropertyChanged}"
+                HorizontalAlignment="Left"
+                Height="25"
+                Margin="415,23,0,0"
+                VerticalAlignment="Top"
+                Width="125" />
+        <Button Content="Employee Registration"
+                Command="{Binding createEmployee, UpdateSourceTrigger=PropertyChanged}"
+                HorizontalAlignment="Left"
+                Height="25"
+                Margin="40,23,0,0"
+                VerticalAlignment="Top"
+                Width="130" />
+        <Button Content="Manager Registration"
+                Command="{Binding createManager, UpdateSourceTrigger=PropertyChanged}"
+                HorizontalAlignment="Left"
+                Height="25"
+                Margin="225,23,0,0"
+                VerticalAlignment="Top"
+                Width="130" />
+        <Grid Name="userGrid"
+              Visibility="{Binding viewUser, UpdateSourceTrigger=PropertyChanged}">
+            <Label Content="Firstname:"
+                   HorizontalAlignment="Left"
+                   Height="25"
+                   Margin="80,80,0,0"
+                   VerticalAlignment="Top"
+                   Width="90" />
+            <Label Content="Lastname:"
+                   HorizontalAlignment="Left"
+                   Height="25"
+                   Margin="80,120,0,0"
+                   VerticalAlignment="Top"
+                   Width="90" />
+            <TextBox x:Name="txtFirstName"
+                     Text="{Binding newUser.fullname, UpdateSourceTrigger=PropertyChanged}"
+                     HorizontalAlignment="Left"
+                     Height="18"
+                     Margin="240,80,0,0"
+                     TextWrapping="Wrap"
+                     VerticalAlignment="Top"
+                     Width="200" />
+            <TextBox x:Name="txtLastName"
+                     Text="{Binding newUser.fullname, UpdateSourceTrigger=PropertyChanged}"
+                     HorizontalAlignment="Left"
+                     Height="18"
+                     Margin="240,120,0,0"
+                     TextWrapping="Wrap"
+                     VerticalAlignment="Top"
+                     Width="200" />
+            <Label Content="JMBG:"
+                   HorizontalAlignment="Left"
+                   Height="25"
+                   Margin="80,155,0,0"
+                   VerticalAlignment="Top"
+                   Width="60" />
+            <TextBox x:Name="txtjmbg"
+                     Validation.ErrorTemplate="{StaticResource textBoxErrorTemplate}"
+                     HorizontalAlignment="Left"
+                     Height="18"
+                     Margin="240,162,0,0"
+                     TextWrapping="Wrap"
+                     VerticalAlignment="Top"
+                     Width="200">
+                <TextBox.Text>
+                    <Binding Path="newUser.JMBG"
+                             UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True"
+                             NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <Validation:ValidJmbg />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <Label Content="Residence:"
+                   HorizontalAlignment="Left"
+                   Height="25"
+                   Margin="80,195,0,0"
+                   VerticalAlignment="Top"
+                   Width="90" />
+            <TextBox x:Name="txtResidence"
+                     Validation.ErrorTemplate="{StaticResource textBoxErrorTemplate}"
+                     HorizontalAlignment="Left"
+                     Height="18"
+                     Margin="240,202,0,0"
+                     TextWrapping="Wrap"
+                     VerticalAlignment="Top"
+                     Width="200"></TextBox>
+            <Label Content="Username:"
+                   HorizontalAlignment="Left"
+                   Height="25"
+                   Margin="80,242,0,0"
+                   VerticalAlignment="Top"
+                   Width="90"
+                   RenderTransformOrigin="0.5,-1.8" />
+            <TextBox Validation.ErrorTemplate="{StaticResource textBoxErrorTemplate}"
+                     Name="txtUsername"
+                     HorizontalAlignment="Left"
+                     Height="18"
+                     Margin="240,242,0,0"
+                     TextWrapping="Wrap"
+                     VerticalAlignment="Top"
+                     Width="200">
+                <TextBox.Text>
+                    <Binding Path="newUser.username"
+                             UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True"
+                             NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <Validation:ValidUsername />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <Label Content="Password:"
+                   HorizontalAlignment="Left"
+                   Height="25"
+                   Margin="80,280,0,0"
+                   VerticalAlignment="Top"
+                   Width="90" />
+            <PasswordBox HorizontalAlignment="Left"
+                         Margin="240,280,0,0"
+                         VerticalAlignment="Top"
+                         Width="200" />
+            <Label Content="Gender:"
+                   HorizontalAlignment="Left"
+                   Height="25"
+                   Margin="80,315,0,0"
+                   VerticalAlignment="Top"
+                   Width="80"
+                   RenderTransformOrigin="-0.125,0.6" />
+            <Label Content="Marital status:"
+                   HorizontalAlignment="Left"
+                   Height="25"
+                   Margin="80,353,0,0"
+                   VerticalAlignment="Top"
+                   Width="85" />
+            <ComboBox HorizontalAlignment="Left"
+                      x:Name="cmbGender"
+                      DisplayMemberPath="fullname"
+                      IsEditable="True"
+                      ItemsSource="{Binding doctorList, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding selectedDoctor, UpdateSourceTrigger=PropertyChanged}"
+                      Height="18"
+                      Margin="240,322,0,0"
+                      VerticalAlignment="Top"
+                      Width="200" />
+            <ComboBox HorizontalAlignment="Left"
+                      x:Name="cmbMarital"
+                      DisplayMemberPath="fullname"
+                      IsEditable="True"
+                      ItemsSource="{Binding doctorList, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding selectedDoctor, UpdateSourceTrigger=PropertyChanged}"
+                      Height="18"
+                      Margin="240,360,0,0"
+                      VerticalAlignment="Top"
+                      Width="200" />
+      
+        </Grid>
+        <Grid Name="employeeGrid"
+              Visibility="{Binding viewEmployee, UpdateSourceTrigger=PropertyChanged}">
+            <Label Content="Sector:"
+                   HorizontalAlignment="Left"
+                   Height="25"
+                   Margin="80,400,0,0"
+                   VerticalAlignment="Top"
+                   Width="85" />
+            <ComboBox HorizontalAlignment="Left"
+                      x:Name="cmbSector"
+                      DisplayMemberPath="fullname"
+                      IsEditable="True"
+                      ItemsSource="{Binding doctorList, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding selectedDoctor, UpdateSourceTrigger=PropertyChanged}"
+                      Height="18"
+                      Margin="240,400,0,0"
+                      VerticalAlignment="Top"
+                      Width="200" />
+            <Label Content="Position:"
+                   HorizontalAlignment="Left"
+                   Height="25"
+                   Margin="80,440,0,0"
+                   VerticalAlignment="Top"
+                   Width="85" />
+            <ComboBox HorizontalAlignment="Left"
+                      x:Name="cmbPosition"
+                      DisplayMemberPath="fullname"
+                      IsEditable="True"
+                      ItemsSource="{Binding doctorList, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding selectedDoctor, UpdateSourceTrigger=PropertyChanged}"
+                      Height="18"
+                      Margin="240,440,0,0"
+                      VerticalAlignment="Top"
+                      Width="200" />
+            <Label Content="Years of service:"
+                   HorizontalAlignment="Left"
+                   Height="25"
+                   Margin="80,480,0,0"
+                   VerticalAlignment="Top"
+                   Width="95"
+                   RenderTransformOrigin="0.368,0.4" />
+            <TextBox x:Name="txtYearsOfService"
+                     Text="{Binding newUser.password, UpdateSourceTrigger=PropertyChanged}"
+                     HorizontalAlignment="Left"
+                     Height="18"
+                     Margin="240,480,0,0"
+                     TextWrapping="Wrap"
+                     VerticalAlignment="Top"
+                     Width="200" />
+            <Label Content="Qualifications:"
+                   HorizontalAlignment="Left"
+                   Height="25"
+                   Margin="80,515,0,0"
+                   VerticalAlignment="Top"
+                   Width="95"
+                   RenderTransformOrigin="0.368,0.4" />
+            <ComboBox HorizontalAlignment="Left"
+                      x:Name="cmbQualifications"
+                      DisplayMemberPath="fullname"
+                      IsEditable="True"
+                      ItemsSource="{Binding doctorList, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding selectedDoctor, UpdateSourceTrigger=PropertyChanged}"
+                      Height="18"
+                      Margin="240,522,0,0"
+                      VerticalAlignment="Top"
+                      Width="200" />
+            <Button Content="Save"
+                    Command="{Binding save1, UpdateSourceTrigger=PropertyChanged}"
+                    HorizontalAlignment="Left"
+                    Height="25"
+                    Margin="220,615,0,0"
+                    VerticalAlignment="Top"
+                    Width="140" />
+        </Grid>
+        <Grid Name="managerGrid"
+              Visibility="{Binding viewManager, UpdateSourceTrigger=PropertyChanged}">
+            <Label Content="Email:"
+                   HorizontalAlignment="Left"
+                   Height="25"
+                   Margin="80,400,0,0"
+                   VerticalAlignment="Top"
+                   Width="85" />
+            <TextBox x:Name="txtMail"
+                     Text="{Binding newUser.password, UpdateSourceTrigger=PropertyChanged}"
+                     HorizontalAlignment="Left"
+                     Height="18"
+                     Margin="240,400,0,0"
+                     TextWrapping="Wrap"
+                     VerticalAlignment="Top"
+                     Width="200" />
+            <Label Content="Password hint:"
+                   HorizontalAlignment="Left"
+                   Height="25"
+                   Margin="80,440,0,0"
+                   VerticalAlignment="Top"
+                   Width="85" />
+            <TextBox x:Name="txtHint"
+                     Text="{Binding newUser.password, UpdateSourceTrigger=PropertyChanged}"
+                     HorizontalAlignment="Left"
+                     Height="18"
+                     Margin="240,440,0,0"
+                     TextWrapping="Wrap"
+                     VerticalAlignment="Top"
+                     Width="200" />
+            <Label Content="Successful projects:"
+                   HorizontalAlignment="Left"
+                   Height="25"
+                   Margin="80,480,0,0"
+                   VerticalAlignment="Top"
+                   Width="115"
+                   RenderTransformOrigin="0.368,0.4" />
+            <TextBox x:Name="txtProjects"
+                     Text="{Binding newUser.password, UpdateSourceTrigger=PropertyChanged}"
+                     HorizontalAlignment="Left"
+                     Height="18"
+                     Margin="240,480,0,0"
+                     TextWrapping="Wrap"
+                     VerticalAlignment="Top"
+                     Width="200" />
+            <Label Content="Office number:"
+                   HorizontalAlignment="Left"
+                   Height="25"
+                   Margin="80,515,0,0"
+                   VerticalAlignment="Top"
+                   Width="95"
+                   RenderTransformOrigin="0.368,0.4" />
+            <TextBox x:Name="txtOffice"
+                     Text="{Binding newUser.password, UpdateSourceTrigger=PropertyChanged}"
+                     HorizontalAlignment="Left"
+                     Height="18"
+                     Margin="240,522,0,0"
+                     TextWrapping="Wrap"
+                     VerticalAlignment="Top"
+                     Width="200" />
+            <Button Content="Save"
+                    Command="{Binding save2, UpdateSourceTrigger=PropertyChanged}"
+                    HorizontalAlignment="Left"
+                    Height="25"
+                    Margin="220,615,0,0"
+                    VerticalAlignment="Top"
+                    Width="140" />
+        </Grid>
+    </Grid>
+</Window>
