@@ -62,6 +62,7 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
             try
             {
                 person.password = (obj as PasswordBox).Password;
+
                 if(person.role == "owner")
                 {
                     Owner owner = new Owner();
@@ -87,30 +88,6 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
                 {
                     MessageBox.Show("Invalid username or password.Try again");
                 }
-
-                //    currentUser = Service.Service.GetUserByUsernameAndPsw(currentUser.username, currentUser.password);
-                //    if (currentUser == null)
-                //    {
-                //        MessageBox.Show("Invalid username or password.Try again");
-                //        currentUser = new tblUser();
-                //    }
-                //    else
-                //    {
-                //        if (Service.Service.isPatient(currentUser) != null)
-                //        {
-                //            tblPatient currentPatient = Service.Service.isPatient(currentUser);
-                //            Patient pat = new Patient(currentPatient);
-                //            login.Close();
-                //            pat.Show();
-                //        }
-                //        else
-                //        {
-                //            tblDoctor currentDoctor = Service.Service.isDoctor(currentUser);
-                //            Doctor doc = new Doctor(currentDoctor);
-                //            login.Close();
-                //            doc.Show();
-                //        }
-
             }
             catch (Exception ex)
             {

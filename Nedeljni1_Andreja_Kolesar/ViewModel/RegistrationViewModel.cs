@@ -514,6 +514,8 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
             //}
             return true;
         }
+
+
         private ICommand _logOut;
         public ICommand logOut
         {

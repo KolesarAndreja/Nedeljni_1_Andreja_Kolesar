@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Nedeljni1_Andreja_Kolesar.Service
 {
@@ -111,6 +109,24 @@ namespace Nedeljni1_Andreja_Kolesar.Service
                 {
                     List<tblManager> list = new List<tblManager>();
                     list = (from x in context.tblManagers select x).ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
+
+        public static List<tblAdminType> GetTypeAdminList()
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    List<tblAdminType> list = new List<tblAdminType>();
+                    list = (from x in context.tblAdminTypes select x).ToList();
                     return list;
                 }
             }
@@ -312,10 +328,50 @@ namespace Nedeljni1_Andreja_Kolesar.Service
         }
         #endregion
 
+        #region ADD ADMINISTRATOR
+        public static tblAdministrator AddAdministrator(tblAdministrator admin)
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    if (admin.administratorId == 0)
+                    {
+                        //add 
+                        tblAdministrator newAdmin = new tblAdministrator();
+                        newAdmin.adminTypeId = admin.adminTypeId;
+                        //exipry date +7days
+                        DateTime d = DateTime.Now;
+                        d = d.AddDays(7);
+                        newAdmin.expiryDate = d.Date;
+                        newAdmin.userId = admin.userId;
+                        context.tblAdministrators.Add(newAdmin);
+                        context.SaveChanges();
+                        admin.administratorId = newAdmin.administratorId;
+                        return admin;
+                    }
+                    else
+                    {
+                        tblAdministrator adminToEdit = (from x in context.tblAdministrators where x.administratorId == admin.administratorId select x).FirstOrDefault();
+                        adminToEdit.expiryDate = admin.expiryDate;
+                        adminToEdit.adminTypeId = admin.adminTypeId;
+                        adminToEdit.userId = admin.userId;
+                        context.SaveChanges();
+                        return admin;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception: " + ex.Message.ToString());
+                return null;
+            }
+        }
+            #endregion
 
-       #region Get user,manager, employee, administrator
+        #region Get user,manager, employee, administrator
 
-        public static tblUser GetUser(string username, string password)
+            public static tblUser GetUser(string username, string password)
         {
             try
             {
