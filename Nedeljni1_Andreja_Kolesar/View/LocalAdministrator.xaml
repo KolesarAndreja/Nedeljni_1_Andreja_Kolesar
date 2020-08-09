@@ -5,8 +5,78 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Nedeljni1_Andreja_Kolesar.View"
         mc:Ignorable="d"
-        Title="LocalAdministrator" Height="450" Width="800">
+        Title="LocalAdministrator"
+        Height="450"
+        Width="800">
     <Grid>
-        
+        <Button Content="Log Out"
+                Command="{Binding logOut, UpdateSourceTrigger=PropertyChanged}"
+                HorizontalAlignment="Left"
+                Height="20"
+                Margin="560,40,0,0"
+                VerticalAlignment="Top"
+                Width="140" />
+        <Button Content="Edit Managers"
+                Command="{Binding managers, UpdateSourceTrigger=PropertyChanged}"
+                HorizontalAlignment="Left"
+                Margin="60,40,0,0"
+                VerticalAlignment="Top"
+                Width="140" />
+        <Grid x:Name="gridManagers">
+            <Label Content="MANAGERS:"
+                   HorizontalAlignment="Left"
+                   Margin="60,80,0,0"
+                   VerticalAlignment="Top"
+                   Width="160"
+                   FontWeight="Bold"
+                   FontSize="14" />
+            <DataGrid Name="DataGridAllManagers"
+                      ItemsSource="{Binding managerList, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding manager, UpdateSourceTrigger=PropertyChanged}"
+                      Visibility="{Binding viewAdmins, UpdateSourceTrigger=PropertyChanged}"
+                      IsReadOnly="True"
+                      HeadersVisibility="Column"
+                      AutoGenerateColumns="False"
+                      HorizontalGridLinesBrush="Black"
+                      BorderBrush="Black"
+                      Foreground="Black"
+                      FontWeight="Bold"
+                      Margin="45,121,37,49">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Firstname"
+                                        Binding="{Binding firstname}" />
+                    <DataGridTextColumn Header="Lastname"
+                                        Binding="{Binding lastname}" />
+                    <DataGridTextColumn Header="Jmbg"
+                                        Binding="{Binding jmbg}" />
+                    <DataGridTextColumn Header="Username"
+                                        Binding="{Binding username}" />
+                    <DataGridTextColumn Header="Level of resposibility"
+                                        Binding="{Binding levelOfResponsibility}" />
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Name="btnEditUser"
+                                        Content="Edit"
+                                        Command="{Binding DataContext.edit, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                        Margin="4"
+                                        FontWeight="Bold" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Name="btnAssign"
+                                        Content="Assign level"
+                                        Command="{Binding DataContext.assignLevel, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                        Margin="4"
+                                        FontWeight="Bold" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </Window>

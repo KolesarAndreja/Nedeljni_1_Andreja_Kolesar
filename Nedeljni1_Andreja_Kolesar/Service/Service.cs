@@ -26,6 +26,42 @@ namespace Nedeljni1_Andreja_Kolesar.Service
             }
         }
 
+        public static List<vwManager> GetVwManagerList()
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    List<vwManager> list = new List<vwManager>();
+                    list = (from x in context.vwManagers select x).ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
+
+        public static List<vwEmployee> GetVwEmployeeList()
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    List<vwEmployee> list = new List<vwEmployee>();
+                    list = (from x in context.vwEmployees select x).ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
+
         public static List<tblSector> GetSectorList()
         {
             try
@@ -488,6 +524,42 @@ namespace Nedeljni1_Andreja_Kolesar.Service
                 using (dbFirmEntities context = new dbFirmEntities())
                 {
                     tblAdministrator result = (from x in context.tblAdministrators where x.administratorId == id select x).FirstOrDefault();
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception " + ex.Message.ToString());
+                return null;
+            }
+        }
+
+
+        public static tblManager GetManagerById(int id)
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    tblManager result = (from x in context.tblManagers where x.managerId == id select x).FirstOrDefault();
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception " + ex.Message.ToString());
+                return null;
+            }
+        }
+
+
+        public static tblEmployee GetEmployeeById(int id)
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    tblEmployee result = (from x in context.tblEmployees where x.employeeId == id select x).FirstOrDefault();
                     return result;
                 }
             }

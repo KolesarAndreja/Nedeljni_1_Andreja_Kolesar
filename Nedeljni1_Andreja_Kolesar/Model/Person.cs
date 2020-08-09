@@ -11,7 +11,5 @@ namespace Nedeljni1_Andreja_Kolesar.Model
     {
         public string username { get; set; }
         public string password { get; set; }
-        
-        }
     }
 }

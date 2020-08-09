@@ -134,6 +134,7 @@
     <Compile Include="Validation\ValidJmbg.cs" />
     <Compile Include="Validation\ValidMail.cs" />
     <Compile Include="Validation\ValidUsername.cs" />
+    <Compile Include="ViewModel\AssignLevelViewModel.cs" />
     <Compile Include="ViewModel\EditDateViewModel.cs" />
     <Compile Include="ViewModel\EmployeeViewModel.cs" />
     <Compile Include="ViewModel\LocalAdministratorViewModel.cs" />
@@ -143,6 +144,9 @@
     <Compile Include="ViewModel\RegistrationAdministratorViewModel.cs" />
     <Compile Include="ViewModel\RegistrationViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\AssignLevel.xaml.cs">
+      <DependentUpon>AssignLevel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EditDate.xaml.cs">
       <DependentUpon>EditDate.xaml</DependentUpon>
     </Compile>
@@ -184,6 +188,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\AssignLevel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\EditDate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

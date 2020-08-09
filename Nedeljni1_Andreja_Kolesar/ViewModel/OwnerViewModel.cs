@@ -29,7 +29,7 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
             set
             {
                 _adminList = value;
-                OnPropertyChanged("adminList");
+                OnPropertyChanged("managerList");
             }
         }
 
@@ -130,6 +130,41 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
         }
 
         private bool CanEditExecute()
+        {
+            return true;
+        }
+        #endregion
+
+        #region log out
+        private ICommand _logOut;
+        public ICommand logOut
+        {
+            get
+            {
+                if (_logOut == null)
+                {
+                    _logOut = new RelayCommand(param => LogOutExecute(), param => CanLogOutExecute());
+                }
+                return _logOut;
+            }
+        }
+
+        private void LogOutExecute()
+        {
+            try
+            {
+                Login login = new Login();
+                owner.Close();
+                login.ShowDialog();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private bool CanLogOutExecute()
         {
             return true;
         }

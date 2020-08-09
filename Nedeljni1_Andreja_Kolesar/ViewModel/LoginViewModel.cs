@@ -69,8 +69,9 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
                     if (person.username == "WPFMaster" && person.password == "WPFAccess")
                     {
                         Owner owner = new Owner();
-                        owner.Show();
                         login.Close();
+                        owner.Show();
+                        
                     }
                     else
                     {
@@ -86,8 +87,9 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
                         if (type == "Local")
                         {
                             LocalAdministrator la = new LocalAdministrator();
-                            la.ShowDialog();
                             login.Close();
+                            la.ShowDialog();
+                           
                         }
                         else if (type == "Team")
                         {
@@ -102,8 +104,9 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
                     {
                         tblEmployee e = Service.Service.isEmployee(user);
                         Employee employee = new Employee();
-                        employee.Show();
                         login.Close();
+                        employee.Show();
+                        
                     }
                     else
                     {
@@ -111,8 +114,9 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
                         if (m.levelOfResponsibility != null)
                         {
                             Manager manager = new Manager();
-                            manager.Show();
                             login.Close();
+                            manager.Show();
+                            
                         }
                         else
                         {
