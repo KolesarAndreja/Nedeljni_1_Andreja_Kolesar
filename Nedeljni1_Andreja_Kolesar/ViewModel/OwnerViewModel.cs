@@ -1,10 +1,8 @@
 ﻿using Nedeljni1_Andreja_Kolesar.Command;
+using Nedeljni1_Andreja_Kolesar.Service;
 using Nedeljni1_Andreja_Kolesar.View;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -14,12 +12,53 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
     {
         Owner owner;
 
-
         public OwnerViewModel(Owner open)
         {
             owner = open;
+            adminList = Service.Service.GetVwAdministratorList();
+            admin = new vwAdministrator();
         }
 
+        private List<vwAdministrator> _adminList;
+        public List<vwAdministrator> adminList
+        {
+            get
+            {
+                return _adminList;
+            }
+            set
+            {
+                _adminList = value;
+                OnPropertyChanged("adminList");
+            }
+        }
+
+        private vwAdministrator _admin;
+        public vwAdministrator admin
+        {
+            get
+            {
+                return _admin;
+            }
+            set
+            {
+                _admin = value;
+                OnPropertyChanged("admin");
+            }
+        }
+
+        private bool _isDeletedReport;
+        public bool isDeletedReport
+        {
+            get
+            {
+                return _isDeletedReport;
+            }
+            set
+            {
+                _isDeletedReport = value;
+            }
+        }
 
         #region REGISTRATION
 
@@ -50,6 +89,47 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
             }
         }
         private bool CanRegistrationExecute()
+        {
+            return true;
+        }
+        #endregion
+
+
+        #region EDIT
+        private ICommand _edit;
+        public ICommand edit
+        {
+            get
+            {
+                if (_edit == null)
+                {
+                    _edit = new RelayCommand(param => EditDateExecute(), param => CanEditExecute());
+                }
+                return _edit;
+            }
+        }
+
+        private void EditDateExecute()
+        {
+
+            try
+            {
+                EditDate e = new EditDate(admin);
+                e.ShowDialog();
+
+                if ((e.DataContext as EditDateViewModel).isUpdated == true)
+                {
+                    adminList = Service.Service.GetVwAdministratorList();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private bool CanEditExecute()
         {
             return true;
         }

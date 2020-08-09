@@ -8,6 +8,24 @@ namespace Nedeljni1_Andreja_Kolesar.Service
     class Service
     {
         #region get lists
+        public static List<vwAdministrator> GetVwAdministratorList()
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    List<vwAdministrator> list = new List<vwAdministrator>();
+                    list = (from x in context.vwAdministrators select x).ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
+
         public static List<tblSector> GetSectorList()
         {
             try
@@ -444,7 +462,7 @@ namespace Nedeljni1_Andreja_Kolesar.Service
         }
         #endregion
 
-        #region Get type of admin
+        #region Get type of admin, get admin by id
         public static string TypeOfAdmin(tblAdministrator a)
         {
             try
@@ -453,6 +471,24 @@ namespace Nedeljni1_Andreja_Kolesar.Service
                 {
                     tblAdminType result = (from x in context.tblAdminTypes where x.adminTypeId == a.adminTypeId select x).FirstOrDefault();
                     return result.name;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception " + ex.Message.ToString());
+                return null;
+            }
+        }
+
+
+        public static tblAdministrator GetAdminById(int id)
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    tblAdministrator result = (from x in context.tblAdministrators where x.administratorId == id select x).FirstOrDefault();
+                    return result;
                 }
             }
             catch (Exception ex)
