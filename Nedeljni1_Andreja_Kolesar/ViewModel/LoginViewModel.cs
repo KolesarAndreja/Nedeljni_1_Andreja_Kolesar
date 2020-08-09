@@ -93,7 +93,8 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
                         }
                         else if (type == "Team")
                         {
-
+                            TeamAdministrator ta = new TeamAdministrator();
+                            ta.ShowDialog();
                         }
                         else
                         {
@@ -106,7 +107,6 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
                     {
                         tblEmployee e = Service.Service.isEmployee(user);
                         Employee employee = new Employee();
-                        login.Close();
                         employee.Show();
                         
                     }
@@ -116,7 +116,6 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
                         if (m.levelOfResponsibility != null)
                         {
                             Manager manager = new Manager();
-                            login.Close();
                             manager.Show();
                             
                         }

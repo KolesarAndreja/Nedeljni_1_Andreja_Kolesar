@@ -202,15 +202,15 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
 
         private bool CanSaveExecute(object obj)
         {
-            //if (!String.IsNullOrEmpty(newUser.fullname) && !String.IsNullOrEmpty(newUser.JMBG) && !String.IsNullOrEmpty(newUser.username) && !String.IsNullOrEmpty(newUser.password) && !String.IsNullOrEmpty(newPatient.cardNumber) && selectedGender.doctorId != 0)
-            //{
-            //    return true;
-            //}
-            //else
-            //{
-            //    return false;
-            //}
-            return true;
+            currentPassword = (obj as PasswordBox).Password;
+            if (!String.IsNullOrEmpty(newUser.firstname) && !String.IsNullOrEmpty(currentPassword) && !String.IsNullOrEmpty(newUser.lastname) && !String.IsNullOrEmpty(newUser.username) && !String.IsNullOrEmpty(newUser.jmbg) && !String.IsNullOrEmpty(newUser.residence) && selectedGender.genderId != 0 && selectedMarital.marriageStatusId != 0 && selectedType.adminTypeId!=0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private ICommand _logOut;

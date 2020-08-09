@@ -68,7 +68,14 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
 
         private bool CanSaveExecute()
         {
-            return true;
+            if (string.IsNullOrEmpty(position.name))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
         #endregion
     }

@@ -132,6 +132,7 @@
     </Compile>
     <Compile Include="Validation\ValidBackupPassword.cs" />
     <Compile Include="Validation\ValidJmbg.cs" />
+    <Compile Include="Validation\ValidLevel.cs" />
     <Compile Include="Validation\ValidMail.cs" />
     <Compile Include="Validation\ValidPositionName.cs" />
     <Compile Include="Validation\ValidSectorName.cs" />
@@ -188,6 +189,9 @@
     </Compile>
     <Compile Include="View\SystemAdministrator.xaml.cs">
       <DependentUpon>SystemAdministrator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TeamAdministrator.xaml.cs">
+      <DependentUpon>TeamAdministrator.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -251,6 +255,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SystemAdministrator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TeamAdministrator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

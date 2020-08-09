@@ -444,15 +444,15 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
 
         private bool CanSaveExecute(object obj)
         {
-            //if (!String.IsNullOrEmpty(newUser.fullname) && !String.IsNullOrEmpty(newUser.JMBG) && !String.IsNullOrEmpty(newUser.username) && !String.IsNullOrEmpty(newUser.password) && !String.IsNullOrEmpty(newPatient.cardNumber) && selectedGender.doctorId != 0)
-            //{
-            //    return true;
-            //}
-            //else
-            //{
-            //    return false;
-            //}
-            return true;
+            currentPassword = (obj as PasswordBox).Password;
+            if (!String.IsNullOrEmpty(newUser.firstname) && !String.IsNullOrEmpty(newManager.email) && !String.IsNullOrEmpty(newManager.backupPassword) && !String.IsNullOrEmpty(currentPassword) && !String.IsNullOrEmpty(newUser.lastname) && !String.IsNullOrEmpty(newUser.username) && !String.IsNullOrEmpty(newUser.jmbg) && !String.IsNullOrEmpty(newUser.residence) && selectedGender.genderId != 0 && selectedMarital.marriageStatusId != 0 && newManager.officeNumber!=null && newManager.successfulProjects!=null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private ICommand _save2;
@@ -504,15 +504,16 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
 
         private bool CanSave2Execute(object obj)
         {
-            //if (!String.IsNullOrEmpty(newUser.fullname) && !String.IsNullOrEmpty(newUser.JMBG) && !String.IsNullOrEmpty(newUser.username) && !String.IsNullOrEmpty(newUser.password) && !String.IsNullOrEmpty(newManager.account))
-            //{
-            //    return true;
-            //}
-            //else
-            //{
-            //    return false;
-            //}
-            return true;
+            currentPassword = (obj as PasswordBox).Password;
+            if (!String.IsNullOrEmpty(newUser.firstname) && !String.IsNullOrEmpty(currentPassword) &&!String.IsNullOrEmpty(newUser.lastname) && !String.IsNullOrEmpty(newUser.username) && !String.IsNullOrEmpty(newUser.jmbg) && !String.IsNullOrEmpty(newUser.residence) && selectedGender.genderId!=0 && selectedMarital.marriageStatusId!=0 && selectedQualification.qualificationsId!=0 && selectedSector.sectorId!=0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+           
         }
 
 
