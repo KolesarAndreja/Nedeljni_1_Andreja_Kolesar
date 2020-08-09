@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Nedeljni1_Andreja_Kolesar.ViewModel
@@ -54,6 +55,19 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
             {
                 _newEmployee = value;
                 OnPropertyChanged("newEmployee");
+            }
+        }
+
+        private string _currentPassword;
+        public string currentPassword
+        {
+            get
+            {
+                return _currentPassword;
+            }
+            set
+            {
+                _currentPassword = value;
             }
         }
         #endregion
@@ -396,26 +410,30 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
             {
                 if (_save1 == null)
                 {
-                    _save1 = new RelayCommand(param => SaveExecute(), param => CanSaveExecute());
+                    _save1 = new RelayCommand(SaveExecute,CanSaveExecute);
                 }
                 return _save1;
             }
         }
 
-        private void SaveExecute()
+        private void SaveExecute(object obj)
         {
             try
             {
-                //tblUser u = Service.Service.AddUser(newUser);
-                //newPatient.userId = u.userId;
-                //newPatient.doctorId = selectedGender.doctorId;
-                //tblPatient p = Service.Service.AddPatient(newPatient);
+                currentPassword = (obj as PasswordBox).Password;
+                newUser.password = currentPassword;
+                newUser.genderId = selectedGender.genderId;
+                newUser.marriageStatusId = selectedMarital.marriageStatusId;
+                tblUser u = Service.Service.AddUser(newUser);
+                newManager.userId = u.userId;
+                newManager.backupPassword += "WPF";
+                tblManager m = Service.Service.AddManager(newManager);
 
-                //if (u != null && p != null)
-                //{
-                //    MessageBox.Show("Patient has been registered.");
-                //    registration.Close();
-                //}
+                if (u != null && m != null)
+                {
+                    MessageBox.Show("Manager has been registered.");
+                    registration.Close();
+                }
 
             }
             catch (Exception ex)
@@ -424,7 +442,7 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
             }
         }
 
-        private bool CanSaveExecute()
+        private bool CanSaveExecute(object obj)
         {
             //if (!String.IsNullOrEmpty(newUser.fullname) && !String.IsNullOrEmpty(newUser.JMBG) && !String.IsNullOrEmpty(newUser.username) && !String.IsNullOrEmpty(newUser.password) && !String.IsNullOrEmpty(newPatient.cardNumber) && selectedGender.doctorId != 0)
             //{
@@ -444,25 +462,39 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
             {
                 if (_save2 == null)
                 {
-                    _save2 = new RelayCommand(param => Save2Execute(), param => CanSave2Execute());
+                    _save2 = new RelayCommand(Save2Execute,CanSave2Execute);
                 }
                 return _save2;
             }
         }
 
-        private void Save2Execute()
+        private void Save2Execute(object obj)
         {
             try
             {
-                //tblUser u = Service.Service.AddUser(newUser);
-                //newManager.userId = u.userId;
-                //tblDoctor p = Service.Service.AddDoctor(newManager);
+                currentPassword = (obj as PasswordBox).Password;
+                newUser.password = currentPassword;
+                newUser.genderId = selectedGender.genderId;
+                newUser.marriageStatusId = selectedMarital.marriageStatusId;
+                tblUser u = Service.Service.AddUser(newUser);
+                newEmployee.userID = u.userId;
+                newEmployee.sectorId = selectedSector.sectorId;
+                newEmployee.qualificationsId = selectedQualification.qualificationsId;
+                newEmployee.positionID = selectedPosition.positionId;
+                //get random manager
+                Random rnd = new Random();
+                List<tblManager> allManagers = Service.Service.GetManagerList();
+                int i = rnd.Next(0, allManagers.Count);
+                newEmployee.managerId = allManagers[i].managerId;
 
-                //if (u != null && p != null)
-                //{
-                //    MessageBox.Show("Doctor has been registered.");
-                //    registration.Close();
-                //}
+                tblEmployee e = Service.Service.AddEmployee(newEmployee);
+
+                if (u != null && e != null)
+                {
+                    MessageBox.Show("Employee has been registered.");
+                    registration.Close();
+
+                }
             }
             catch (Exception ex)
             {
@@ -470,7 +502,7 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
             }
         }
 
-        private bool CanSave2Execute()
+        private bool CanSave2Execute(object obj)
         {
             //if (!String.IsNullOrEmpty(newUser.fullname) && !String.IsNullOrEmpty(newUser.JMBG) && !String.IsNullOrEmpty(newUser.username) && !String.IsNullOrEmpty(newUser.password) && !String.IsNullOrEmpty(newManager.account))
             //{

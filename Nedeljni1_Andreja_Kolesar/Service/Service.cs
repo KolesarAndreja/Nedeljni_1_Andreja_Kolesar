@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nedeljni1_Andreja_Kolesar.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -120,6 +121,290 @@ namespace Nedeljni1_Andreja_Kolesar.Service
             }
         }
 
+        #endregion
+
+        #region VALIDATION
+        public static bool UsedJmbg(string jmbg)
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    bool b = (from x in context.tblUsers where x.jmbg == jmbg select x).Any();
+                    return b;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception " + ex.Message.ToString());
+                return true;
+            }
+        }
+
+        public static bool UsedUsername(string username)
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    bool b = (from x in context.tblUsers where x.username == username select x).Any();
+                    return b;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception " + ex.Message.ToString());
+                return true;
+            }
+        }
+
+        public static bool UsedEmail(string mail)
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    bool b = (from x in context.tblManagers where x.email == mail select x).Any();
+                    return b;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception " + ex.Message.ToString());
+                return true;
+            }
+        }
+        #endregion
+
+        #region ADD USER
+        public static tblUser AddUser(tblUser user)
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    if (user.userId == 0)
+                    {
+                        //add 
+                        tblUser newUser = new tblUser();
+                        newUser.username = user.username;
+                        newUser.password = user.password;
+                        newUser.jmbg = user.jmbg;
+                        newUser.genderId = user.genderId;
+                        newUser.residence = user.residence;
+                        newUser.marriageStatusId = user.marriageStatusId;
+                        newUser.firstname = user.firstname;
+                        newUser.lastname = user.lastname;
+                        context.tblUsers.Add(newUser);
+                        context.SaveChanges();
+                        user.userId = newUser.userId;
+                        return user;
+                    }
+                    else
+                    {
+                        tblUser userToEdit = (from x in context.tblUsers where x.userId == user.userId select x).FirstOrDefault();
+                        userToEdit.username = user.username;
+                        userToEdit.lastname = user.lastname;
+                        userToEdit.firstname = user.username;
+                        userToEdit.residence = user.residence;
+                        userToEdit.password = user.password;
+                        userToEdit.marriageStatusId = user.marriageStatusId;
+                        userToEdit.genderId = user.genderId;
+                        userToEdit.jmbg = user.jmbg;
+                        context.SaveChanges();
+                        return user;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception: " + ex.Message.ToString());
+                return null;
+            }
+        }
+        #endregion
+
+        #region ADD MANAGER
+
+        public static tblManager AddManager(tblManager manager)
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    if (manager.managerId == 0)
+                    {
+                        //add 
+                        tblManager newManager = new tblManager();
+                        newManager.officeNumber = manager.officeNumber;
+                        newManager.successfulProjects = manager.successfulProjects;
+                        newManager.email = manager.email;
+                        newManager.backupPassword = manager.backupPassword;
+                        newManager.userId = manager.userId;
+                        context.tblManagers.Add(newManager);
+                        context.SaveChanges();
+                        manager.managerId = newManager.managerId;
+                        return manager;
+                    }
+                    else
+                    {
+                        tblManager managerToEdit = (from x in context.tblManagers where  x.managerId== manager.managerId select x).FirstOrDefault();
+                        managerToEdit.officeNumber = manager.officeNumber;
+                        managerToEdit.levelOfResponsibility = manager.levelOfResponsibility;
+                        managerToEdit.salary = manager.salary;
+                        managerToEdit.successfulProjects = manager.successfulProjects;
+                        managerToEdit.backupPassword = manager.backupPassword;
+                        managerToEdit.email = manager.email;
+                        managerToEdit.userId = manager.userId;
+                        context.SaveChanges();
+                        return manager;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception: " + ex.Message.ToString());
+                return null;
+            }
+        }
+        #endregion
+
+        #region ADD EMPLOYEE
+        public static tblEmployee AddEmployee(tblEmployee employee)
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    if (employee.employeeId == 0)
+                    {
+                        //add 
+                        tblEmployee newEmployee = new tblEmployee();
+                        newEmployee.qualificationsId = employee.qualificationsId;
+                        newEmployee.sectorId = employee.sectorId;
+                        newEmployee.positionID = employee.positionID;
+                        newEmployee.yearsOfService = employee.yearsOfService;
+                        newEmployee.managerId = employee.managerId;
+                        context.tblEmployees.Add(newEmployee);
+                        context.SaveChanges();
+                        employee.employeeId = newEmployee.employeeId;
+                        return employee;
+                    }
+                    else
+                    {
+                        tblEmployee employeeToEdit = (from x in context.tblEmployees where x.employeeId == employee.employeeId select x).FirstOrDefault();
+                        employeeToEdit.Salary = employee.Salary;
+                        employeeToEdit.positionID = employee.positionID;
+                        employeeToEdit.sectorId = employee.sectorId;
+                        employeeToEdit.managerId = employee.managerId;
+                        employeeToEdit.yearsOfService = employee.yearsOfService;
+                        employeeToEdit.qualificationsId = employee.qualificationsId;
+                        context.SaveChanges();
+                        return employee;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception: " + ex.Message.ToString());
+                return null;
+            }
+        }
+        #endregion
+
+
+       #region Get user,manager, employee, administrator
+
+        public static tblUser GetUser(string username, string password)
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    tblUser result = (from x in context.tblUsers where x.username == username && x.password == password select x).FirstOrDefault();
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception " + ex.Message.ToString());
+                return null;
+            }
+        }
+
+        //null or manager
+        public static tblManager isManager(tblUser e)
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    tblManager result = (from x in context.tblManagers where x.userId == e.userId select x).FirstOrDefault();
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception " + ex.Message.ToString());
+                return null;
+            }
+        }
+
+        //null or return employee
+        public static tblEmployee isEmployee(tblUser e)
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    tblEmployee result = (from x in context.tblEmployees where x.userID == e.userId select x).FirstOrDefault();
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception " + ex.Message.ToString());
+                return null;
+            }
+        }
+
+
+        //null or return administrator
+        public static tblAdministrator isAdministrator(tblUser e)
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    tblAdministrator result = (from x in context.tblAdministrators where x.userId == e.userId select x).FirstOrDefault();
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception " + ex.Message.ToString());
+                return null;
+            }
+        }
+        #endregion
+
+        #region Get type of admin
+        public static string TypeOfAdmin(tblAdministrator a)
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    tblAdminType result = (from x in context.tblAdminTypes where x.adminTypeId == a.adminTypeId select x).FirstOrDefault();
+                    return result.name;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception " + ex.Message.ToString());
+                return null;
+            }
+        }
         #endregion
     }
 }

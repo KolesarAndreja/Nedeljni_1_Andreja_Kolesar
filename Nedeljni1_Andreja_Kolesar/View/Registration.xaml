@@ -134,6 +134,7 @@
                    VerticalAlignment="Top"
                    Width="90" />
             <PasswordBox HorizontalAlignment="Left"
+                         x:Name="passwordBox"
                          Margin="240,280,0,0"
                          VerticalAlignment="Top"
                          Width="200" />
@@ -240,6 +241,7 @@
                       Width="200" />
             <Button Content="Save"
                     Command="{Binding save1, UpdateSourceTrigger=PropertyChanged}"
+                    CommandParameter="{Binding ElementName=passwordBox}"
                     HorizontalAlignment="Left"
                     Height="25"
                     Margin="220,615,0,0"
@@ -255,13 +257,24 @@
                    VerticalAlignment="Top"
                    Width="85" />
             <TextBox x:Name="txtMail"
-                     Text="{Binding newManager.email, UpdateSourceTrigger=PropertyChanged}"
+                     Validation.ErrorTemplate="{StaticResource textBoxErrorTemplate}"
                      HorizontalAlignment="Left"
                      Height="18"
                      Margin="240,400,0,0"
                      TextWrapping="Wrap"
                      VerticalAlignment="Top"
-                     Width="200" />
+                     Width="200">
+                <TextBox.Text>
+                    <Binding Path="newManager.email"
+                             UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True"
+                             NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <Validation:ValidMail />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
             <Label Content="Password hint:"
                    HorizontalAlignment="Left"
                    Height="25"
@@ -269,13 +282,24 @@
                    VerticalAlignment="Top"
                    Width="85" />
             <TextBox x:Name="txtHint"
-                     Text="{Binding newManager.backupPassword, UpdateSourceTrigger=PropertyChanged}"
+                     Validation.ErrorTemplate="{StaticResource textBoxErrorTemplate}"
                      HorizontalAlignment="Left"
                      Height="18"
                      Margin="240,440,0,0"
                      TextWrapping="Wrap"
                      VerticalAlignment="Top"
-                     Width="200" />
+                     Width="200">
+                <TextBox.Text>
+                    <Binding Path="newManager.backupPassword"
+                             UpdateSourceTrigger="PropertyChanged"
+                             ValidatesOnDataErrors="True"
+                             NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <Validation:ValidBackupPassword />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
             <Label Content="Successful projects:"
                    HorizontalAlignment="Left"
                    Height="25"
@@ -290,7 +314,7 @@
                      Margin="240,480,0,0"
                      TextWrapping="Wrap"
                      VerticalAlignment="Top"
-                     Width="200" />
+                     Width="200"></TextBox>
             <Label Content="Office number:"
                    HorizontalAlignment="Left"
                    Height="25"
@@ -307,7 +331,8 @@
                      VerticalAlignment="Top"
                      Width="200" />
             <Button Content="Save"
-                    Command="{Binding save2, UpdateSourceTrigger=PropertyChanged}"
+                    Command="{Binding save1, UpdateSourceTrigger=PropertyChanged}"
+                    CommandParameter="{Binding ElementName=passwordBox}"
                     HorizontalAlignment="Left"
                     Height="25"
                     Margin="220,615,0,0"

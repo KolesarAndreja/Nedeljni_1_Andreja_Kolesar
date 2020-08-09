@@ -3,15 +3,15 @@ using System.Windows.Controls;
 
 namespace Nedeljni1_Andreja_Kolesar.Validation
 {
-    class ValidUsername: ValidationRule
+    class ValidBackupPassword : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            string username = value as string;
+            string backup = value as string;
 
-            if (Service.Service.UsedUsername(username))
+            if (backup.Length<5)
             {
-                return new ValidationResult(false, "This username is already taken");
+                return new ValidationResult(false, "must be at least 5 letters");
             }
             else
             {

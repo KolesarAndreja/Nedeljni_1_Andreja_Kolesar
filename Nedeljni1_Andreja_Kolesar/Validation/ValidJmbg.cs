@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace Nedeljni1_Andreja_Kolesar.Validation
@@ -28,10 +24,10 @@ namespace Nedeljni1_Andreja_Kolesar.Validation
                         return new ValidationResult(false, "Jmbg must contain 13 digits");
                     }
                 }
-                //if (Service.Service.UsedJmbg(jmbg))
-                //{
-                //    return new ValidationResult(false, "This jmbg is already taken.");
-                //}
+                if (Service.Service.UsedJmbg(jmbg))
+                {
+                    return new ValidationResult(false, "This jmbg is already taken.");
+                }
                 //chack part which refers to birth date
                 DateTime now = DateTime.Now;
                 char[] stringCurrentYear = now.Year.ToString().Substring(1).ToCharArray();

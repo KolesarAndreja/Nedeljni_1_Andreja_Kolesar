@@ -15,16 +15,13 @@ using System.Windows.Shapes;
 namespace Nedeljni1_Andreja_Kolesar.View
 {
     /// <summary>
-    /// Interaction logic for ManagerAccess.xaml
+    /// Interaction logic for Manager.xaml
     /// </summary>
-    public partial class ManagerAccess : Window
+    public partial class Manager : Window
     {
-        public ManagerAccess()
+        public Manager()
         {
             InitializeComponent();
-            this.DataContext = new ManagerAccessViewModel(this);
         }
-
-      
     }
 }

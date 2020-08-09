@@ -4,6 +4,7 @@ using Nedeljni1_Andreja_Kolesar.View;
 using System;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Nedeljni1_Andreja_Kolesar.ViewModel
@@ -13,10 +14,25 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
         Login login;
         private int counter=0;
 
+
+        private Person _person;
+        public Person person
+        {
+            get
+            {
+                return _person;
+            }
+            set
+            {
+                _person=value;
+                OnPropertyChanged("person");
+            }
+        }
         #region constructor
         public LoginViewModel(Login openLogin)
         {
             login = openLogin;
+            person = new Person();
             counter++;
             if (counter == 1)
             {
@@ -43,37 +59,63 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
         private void LoginExecute(object obj)
         {
 
-            //try
-            //{
-            //    currentUser.password = (obj as PasswordBox).Password;
-            //    currentUser = Service.Service.GetUserByUsernameAndPsw(currentUser.username, currentUser.password);
-            //    if (currentUser == null)
-            //    {
-            //        MessageBox.Show("Invalid username or password.Try again");
-            //        currentUser = new tblUser();
-            //    }
-            //    else
-            //    {
-            //        if (Service.Service.isPatient(currentUser) != null)
-            //        {
-            //            tblPatient currentPatient = Service.Service.isPatient(currentUser);
-            //            Patient pat = new Patient(currentPatient);
-            //            login.Close();
-            //            pat.Show();
-            //        }
-            //        else
-            //        {
-            //            tblDoctor currentDoctor = Service.Service.isDoctor(currentUser);
-            //            Doctor doc = new Doctor(currentDoctor);
-            //            login.Close();
-            //            doc.Show();
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.ToString());
-            //}
+            try
+            {
+                person.password = (obj as PasswordBox).Password;
+                if(person.role == "owner")
+                {
+                    Owner owner = new Owner();
+                    owner.Show();
+                    login.Close();
+                }
+                else if(person.role == "manager")
+                {
+                    Manager manager = new Manager();
+                    manager.Show();
+                    login.Close();
+                }
+                else if(person.role == "administrator")
+                {
+                    Administrator administrator = new Administrator();
+                    administrator.Show();
+                    login.Close();
+                }else if(person.role =="pending manager")
+                {
+                    MessageBox.Show("Please wait until the administrator assigns you a level of responsibility");
+                }
+                else
+                {
+                    MessageBox.Show("Invalid username or password.Try again");
+                }
+
+                //    currentUser = Service.Service.GetUserByUsernameAndPsw(currentUser.username, currentUser.password);
+                //    if (currentUser == null)
+                //    {
+                //        MessageBox.Show("Invalid username or password.Try again");
+                //        currentUser = new tblUser();
+                //    }
+                //    else
+                //    {
+                //        if (Service.Service.isPatient(currentUser) != null)
+                //        {
+                //            tblPatient currentPatient = Service.Service.isPatient(currentUser);
+                //            Patient pat = new Patient(currentPatient);
+                //            login.Close();
+                //            pat.Show();
+                //        }
+                //        else
+                //        {
+                //            tblDoctor currentDoctor = Service.Service.isDoctor(currentUser);
+                //            Doctor doc = new Doctor(currentDoctor);
+                //            login.Close();
+                //            doc.Show();
+                //        }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private bool CanLoginExecute(object obj)
