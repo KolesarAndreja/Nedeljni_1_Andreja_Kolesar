@@ -480,7 +480,7 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
                 newEmployee.userID = u.userId;
                 newEmployee.sectorId = selectedSector.sectorId;
                 newEmployee.qualificationsId = selectedQualification.qualificationsId;
-                newEmployee.positionID = selectedPosition.positionId;
+              
                 //get random manager
                 Random rnd = new Random();
                 List<tblManager> allManagers = Service.Service.GetManagerList();

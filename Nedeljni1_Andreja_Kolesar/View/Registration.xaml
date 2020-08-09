@@ -240,7 +240,7 @@
                       VerticalAlignment="Top"
                       Width="200" />
             <Button Content="Save"
-                    Command="{Binding save1, UpdateSourceTrigger=PropertyChanged}"
+                    Command="{Binding save2, UpdateSourceTrigger=PropertyChanged}"
                     CommandParameter="{Binding ElementName=passwordBox}"
                     HorizontalAlignment="Left"
                     Height="25"

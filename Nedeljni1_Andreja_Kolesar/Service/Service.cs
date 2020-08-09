@@ -398,9 +398,13 @@ namespace Nedeljni1_Andreja_Kolesar.Service
                         tblEmployee newEmployee = new tblEmployee();
                         newEmployee.qualificationsId = employee.qualificationsId;
                         newEmployee.sectorId = employee.sectorId;
-                        newEmployee.positionID = employee.positionID;
+                        if (employee.positionID!=0)
+                        {
+                            newEmployee.positionID = employee.positionID;
+                        }
                         newEmployee.yearsOfService = employee.yearsOfService;
                         newEmployee.managerId = employee.managerId;
+                        newEmployee.userID = employee.userID;
                         context.tblEmployees.Add(newEmployee);
                         context.SaveChanges();
                         employee.employeeId = newEmployee.employeeId;
@@ -415,6 +419,7 @@ namespace Nedeljni1_Andreja_Kolesar.Service
                         employeeToEdit.managerId = employee.managerId;
                         employeeToEdit.yearsOfService = employee.yearsOfService;
                         employeeToEdit.qualificationsId = employee.qualificationsId;
+                        employeeToEdit.userID = employee.userID;
                         context.SaveChanges();
                         return employee;
                     }
