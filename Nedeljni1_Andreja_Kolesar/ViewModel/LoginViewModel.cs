@@ -1,5 +1,6 @@
 ﻿using Nedeljni1_Andreja_Kolesar.Command;
 using Nedeljni1_Andreja_Kolesar.Model;
+using Nedeljni1_Andreja_Kolesar.Service;
 using Nedeljni1_Andreja_Kolesar.View;
 using System;
 using System.IO;
@@ -62,31 +63,62 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
             try
             {
                 person.password = (obj as PasswordBox).Password;
-
-                if(person.role == "owner")
+                tblUser user = Service.Service.GetUser(person.username, person.password);
+                if (user == null)
                 {
-                    Owner owner = new Owner();
-                    owner.Show();
-                    login.Close();
-                }
-                else if(person.role == "manager")
-                {
-                    Manager manager = new Manager();
-                    manager.Show();
-                    login.Close();
-                }
-                else if(person.role == "administrator")
-                {
-                    Administrator administrator = new Administrator();
-                    administrator.Show();
-                    login.Close();
-                }else if(person.role =="pending manager")
-                {
-                    MessageBox.Show("Please wait until the administrator assigns you a level of responsibility");
+                    if (person.username == "WPFMaster" && person.password == "WPFAccess")
+                    {
+                        Owner owner = new Owner();
+                        owner.Show();
+                        login.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid username or password.Try again");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Invalid username or password.Try again");
+                    if (Service.Service.isAdministrator(user) != null)
+                    {
+                        tblAdministrator a = Service.Service.isAdministrator(user);
+                        string type = Service.Service.TypeOfAdmin(a);
+                        if (type == "Local")
+                        {
+                            LocalAdministrator la = new LocalAdministrator();
+                            la.ShowDialog();
+                            login.Close();
+                        }
+                        else if (type == "Team")
+                        {
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    else if (Service.Service.isEmployee(user) != null)
+                    {
+                        tblEmployee e = Service.Service.isEmployee(user);
+                        Employee employee = new Employee();
+                        employee.Show();
+                        login.Close();
+                    }
+                    else
+                    {
+                        tblManager m = Service.Service.isManager(user);
+                        if (m.levelOfResponsibility != null)
+                        {
+                            Manager manager = new Manager();
+                            manager.Show();
+                            login.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please wait until the Local administrator assigns a level of responsibility");
+                        }
+                    }
                 }
             }
             catch (Exception ex)

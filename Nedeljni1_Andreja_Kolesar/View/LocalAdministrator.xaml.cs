@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Nedeljni1_Andreja_Kolesar.View
 {
     /// <summary>
-    /// Interaction logic for Administrator.xaml
+    /// Interaction logic for LocalAdministrator.xaml
     /// </summary>
-    public partial class Administrator : Window
+    public partial class LocalAdministrator : Window
     {
-        public Administrator()
+        public LocalAdministrator()
         {
             InitializeComponent();
         }

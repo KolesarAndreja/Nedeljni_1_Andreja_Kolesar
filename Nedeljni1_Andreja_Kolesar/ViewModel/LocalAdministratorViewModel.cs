@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Nedeljni1_Andreja_Kolesar.ViewModel
 {
-    class AdministratorViewModel
+    class LocalAdministratorViewModel
     {
     }
 }
