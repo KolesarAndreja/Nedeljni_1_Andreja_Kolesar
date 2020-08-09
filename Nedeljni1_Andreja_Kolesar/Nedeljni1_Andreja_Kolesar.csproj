@@ -133,6 +133,8 @@
     <Compile Include="Validation\ValidBackupPassword.cs" />
     <Compile Include="Validation\ValidJmbg.cs" />
     <Compile Include="Validation\ValidMail.cs" />
+    <Compile Include="Validation\ValidPositionName.cs" />
+    <Compile Include="Validation\ValidSectorName.cs" />
     <Compile Include="Validation\ValidUsername.cs" />
     <Compile Include="ViewModel\AddPositionViewModel.cs" />
     <Compile Include="ViewModel\AddSectorViewModel.cs" />

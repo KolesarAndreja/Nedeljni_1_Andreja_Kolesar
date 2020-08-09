@@ -211,6 +211,40 @@ namespace Nedeljni1_Andreja_Kolesar.Service
             }
         }
 
+        public static bool UsedSectorName(string name)
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    bool b = (from x in context.tblSectors where x.name == name select x).Any();
+                    return b;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception " + ex.Message.ToString());
+                return true;
+            }
+        }
+
+        public static bool UsedPositionName(string name)
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    bool b = (from x in context.tblPositions where x.name == name select x).Any();
+                    return b;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception " + ex.Message.ToString());
+                return true;
+            }
+        }
+
         public static bool UsedUsername(string username)
         {
             try
