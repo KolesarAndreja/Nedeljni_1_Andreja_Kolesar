@@ -1,0 +1,70 @@
+﻿<Window x:Class="Nedeljni1_Andreja_Kolesar.View.Owner"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Nedeljni1_Andreja_Kolesar.View"
+        mc:Ignorable="d"
+        Title="Owner" Height="450" Width="800">
+    <Grid>
+        <Button Content="Log Out"
+                Command="{Binding logOut, UpdateSourceTrigger=PropertyChanged}"
+                HorizontalAlignment="Left"
+                Height="20"
+                Margin="560,40,0,0"
+                VerticalAlignment="Top"
+                Width="140" />
+        <Button Content="Create administrator"
+                Command="{Binding registration, UpdateSourceTrigger=PropertyChanged}"
+                HorizontalAlignment="Left"
+                Margin="60,40,0,0"
+                VerticalAlignment="Top"
+                Width="140" />
+      
+        <DataGrid Name="DataGridAllAdmins"
+                  ItemsSource="{Binding adminList, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding admin, UpdateSourceTrigger=PropertyChanged}"
+                  Visibility="{Binding viewAdmins, UpdateSourceTrigger=PropertyChanged}"
+                  IsReadOnly="True"
+                  HeadersVisibility="Column"
+                  AutoGenerateColumns="False"
+                  HorizontalGridLinesBrush="Black"
+                  BorderBrush="Black"
+                  Foreground="Black"
+                  FontWeight="Bold"
+                  Margin="45,121,37,49">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Firstname"
+                                    Binding="{Binding firstname}" />
+                <DataGridTextColumn Header="Lastname"
+                                    Binding="{Binding lastname}" />
+                <DataGridTextColumn Header="Jmbg"
+                                    Binding="{Binding jmbg}" />
+                <DataGridTextColumn Header="Type"
+                                    Binding="{Binding typeName}" />
+                <DataGridTextColumn Header="Expiry date"
+                                    Binding="{Binding expiryDate}" />
+                <DataGridTextColumn Header="Username"
+                                    Binding="{Binding username}" />
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="btnEditUser"
+                                    Content="Edit"
+                                    Command="{Binding DataContext.edit, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                    Margin="4"
+                                    FontWeight="Bold" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="ADMINISTRATORS:"
+               HorizontalAlignment="Left"
+               Margin="60,80,0,0"
+               VerticalAlignment="Top"
+               Width="160"
+               FontWeight="Bold"
+               FontSize="14" />
+    </Grid>
+</Window>

@@ -1,0 +1,1543 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbFirmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblAdministrator">
+          <Key>
+            <PropertyRef Name="administratorId" />
+          </Key>
+          <Property Name="administratorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="expiryDate" Type="date" Nullable="false" />
+          <Property Name="adminTypeId" Type="int" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblAdminType">
+          <Key>
+            <PropertyRef Name="adminTypeId" />
+          </Key>
+          <Property Name="adminTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblDailyReport">
+          <Key>
+            <PropertyRef Name="reportId" />
+          </Key>
+          <Property Name="reportId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reportDate" Type="date" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="workingHours" Type="int" Nullable="false" />
+          <Property Name="employeeId" Type="int" />
+          <Property Name="projectId" Type="int" />
+        </EntityType>
+        <EntityType Name="tblEditRequest">
+          <Key>
+            <PropertyRef Name="requestId" />
+          </Key>
+          <Property Name="requestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employeeId" Type="int" />
+          <Property Name="field" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="previousValue" Type="int" Nullable="false" />
+          <Property Name="newValue" Type="int" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="requestDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblEmployee">
+          <Key>
+            <PropertyRef Name="employeeId" />
+          </Key>
+          <Property Name="employeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="sectorId" Type="int" Nullable="false" />
+          <Property Name="positionID" Type="int" />
+          <Property Name="yearsOfService" Type="int" Nullable="false" />
+          <Property Name="Salary" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="qualificationsId" Type="int" Nullable="false" />
+          <Property Name="managerId" Type="int" />
+        </EntityType>
+        <EntityType Name="tblGender">
+          <Key>
+            <PropertyRef Name="genderId" />
+          </Key>
+          <Property Name="genderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="20" />
+          <Property Name="symbol" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblManager">
+          <Key>
+            <PropertyRef Name="managerId" />
+          </Key>
+          <Property Name="managerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="backupPassword" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="levelOfResponsibility" Type="char" MaxLength="1" />
+          <Property Name="successfulProjects" Type="int" />
+          <Property Name="salary" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="officeNumber" Type="int" />
+          <Property Name="userId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblMarriageStatus">
+          <Key>
+            <PropertyRef Name="marriageStatusId" />
+          </Key>
+          <Property Name="marriageStatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblPosition">
+          <Key>
+            <PropertyRef Name="positionId" />
+          </Key>
+          <Property Name="positionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="tblProfessionalQualification">
+          <Key>
+            <PropertyRef Name="qualificationsId" />
+          </Key>
+          <Property Name="qualificationsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="40" />
+          <Property Name="symbol" Type="varchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblProject">
+          <Key>
+            <PropertyRef Name="projectId" />
+          </Key>
+          <Property Name="projectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="projectName" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="40" />
+          <Property Name="clientName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="contractDate" Type="date" Nullable="false" />
+          <Property Name="contractManagerId" Type="int" Nullable="false" />
+          <Property Name="startingDate" Type="date" Nullable="false" />
+          <Property Name="deadline" Type="date" Nullable="false" />
+          <Property Name="hourlyRate" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="realisation" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="leaderId" Type="int" Nullable="false" />
+          <Property Name="employee1" Type="int" />
+          <Property Name="employee2" Type="int" />
+          <Property Name="employee3" Type="int" />
+          <Property Name="employee4" Type="int" />
+          <Property Name="employee5" Type="int" />
+        </EntityType>
+        <EntityType Name="tblSector">
+          <Key>
+            <PropertyRef Name="sectorId" />
+          </Key>
+          <Property Name="sectorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="lastname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="jmbg" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="genderId" Type="int" />
+          <Property Name="residence" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="marriageStatusId" Type="int" />
+          <Property Name="username" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbFirm.dbo.vwAdministrator' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwAdministrator">
+          <Key>
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="firstname" />
+            <PropertyRef Name="lastname" />
+            <PropertyRef Name="jmbg" />
+            <PropertyRef Name="residence" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="password" />
+            <PropertyRef Name="administratorId" />
+            <PropertyRef Name="adminTypeId" />
+            <PropertyRef Name="expiryDate" />
+            <PropertyRef Name="status" />
+            <PropertyRef Name="gender" />
+            <PropertyRef Name="typeName" />
+          </Key>
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="lastname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="jmbg" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="genderId" Type="int" />
+          <Property Name="residence" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="marriageStatusId" Type="int" />
+          <Property Name="username" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="administratorId" Type="int" Nullable="false" />
+          <Property Name="adminTypeId" Type="int" Nullable="false" />
+          <Property Name="expiryDate" Type="date" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="gender" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="typeName" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbFirm.dbo.vwEmployee' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwEmployee">
+          <Key>
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="firstname" />
+            <PropertyRef Name="lastname" />
+            <PropertyRef Name="jmbg" />
+            <PropertyRef Name="residence" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="password" />
+            <PropertyRef Name="employeeId" />
+            <PropertyRef Name="qualificationsId" />
+            <PropertyRef Name="sectorId" />
+            <PropertyRef Name="yearsOfService" />
+            <PropertyRef Name="status" />
+            <PropertyRef Name="gender" />
+            <PropertyRef Name="sectorName" />
+            <PropertyRef Name="positionName" />
+            <PropertyRef Name="qualification" />
+          </Key>
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="lastname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="jmbg" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="genderId" Type="int" />
+          <Property Name="residence" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="marriageStatusId" Type="int" />
+          <Property Name="username" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="employeeId" Type="int" Nullable="false" />
+          <Property Name="managerId" Type="int" />
+          <Property Name="positionID" Type="int" />
+          <Property Name="qualificationsId" Type="int" Nullable="false" />
+          <Property Name="Salary" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="sectorId" Type="int" Nullable="false" />
+          <Property Name="yearsOfService" Type="int" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="gender" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="sectorName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="positionName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="qualification" Type="varchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbFirm.dbo.vwManager' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwManager">
+          <Key>
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="firstname" />
+            <PropertyRef Name="lastname" />
+            <PropertyRef Name="jmbg" />
+            <PropertyRef Name="residence" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="password" />
+            <PropertyRef Name="backupPassword" />
+            <PropertyRef Name="email" />
+            <PropertyRef Name="managerId" />
+            <PropertyRef Name="status" />
+            <PropertyRef Name="gender" />
+          </Key>
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="lastname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="jmbg" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="genderId" Type="int" />
+          <Property Name="residence" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="marriageStatusId" Type="int" />
+          <Property Name="username" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="backupPassword" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="levelOfResponsibility" Type="char" MaxLength="1" />
+          <Property Name="managerId" Type="int" Nullable="false" />
+          <Property Name="officeNumber" Type="int" />
+          <Property Name="salary" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="successfulProjects" Type="int" />
+          <Property Name="status" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="gender" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tblAdmini__admin__5E74FADA">
+          <End Role="tblAdminType" Type="Self.tblAdminType" Multiplicity="1" />
+          <End Role="tblAdministrator" Type="Self.tblAdministrator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAdminType">
+              <PropertyRef Name="adminTypeId" />
+            </Principal>
+            <Dependent Role="tblAdministrator">
+              <PropertyRef Name="adminTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblAdmini__userI__5F691F13">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblAdministrator" Type="Self.tblAdministrator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="tblAdministrator">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblDailyR__emplo__6BCEF5F8">
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="0..1" />
+          <End Role="tblDailyReport" Type="Self.tblDailyReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="employeeId" />
+            </Principal>
+            <Dependent Role="tblDailyReport">
+              <PropertyRef Name="employeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblDailyR__proje__6CC31A31">
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="0..1" />
+          <End Role="tblDailyReport" Type="Self.tblDailyReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProject">
+              <PropertyRef Name="projectId" />
+            </Principal>
+            <Dependent Role="tblDailyReport">
+              <PropertyRef Name="projectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEditRe__emplo__59B045BD">
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="0..1" />
+          <End Role="tblEditRequest" Type="Self.tblEditRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="employeeId" />
+            </Principal>
+            <Dependent Role="tblEditRequest">
+              <PropertyRef Name="employeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEmploy__manag__56D3D912">
+          <End Role="tblManager" Type="Self.tblManager" Multiplicity="0..1" />
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblManager">
+              <PropertyRef Name="managerId" />
+            </Principal>
+            <Dependent Role="tblEmployee">
+              <PropertyRef Name="managerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEmploy__posit__54EB90A0">
+          <End Role="tblPosition" Type="Self.tblPosition" Multiplicity="0..1" />
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPosition">
+              <PropertyRef Name="positionId" />
+            </Principal>
+            <Dependent Role="tblEmployee">
+              <PropertyRef Name="positionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEmploy__quali__55DFB4D9">
+          <End Role="tblProfessionalQualification" Type="Self.tblProfessionalQualification" Multiplicity="1" />
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProfessionalQualification">
+              <PropertyRef Name="qualificationsId" />
+            </Principal>
+            <Dependent Role="tblEmployee">
+              <PropertyRef Name="qualificationsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEmploy__secto__53F76C67">
+          <End Role="tblSector" Type="Self.tblSector" Multiplicity="1" />
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSector">
+              <PropertyRef Name="sectorId" />
+            </Principal>
+            <Dependent Role="tblEmployee">
+              <PropertyRef Name="sectorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEmploy__userI__5303482E">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="tblEmployee">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblManage__userI__5026DB83">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblManager" Type="Self.tblManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="tblManager">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblProjec__contr__62458BBE">
+          <End Role="tblManager" Type="Self.tblManager" Multiplicity="1" />
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblManager">
+              <PropertyRef Name="managerId" />
+            </Principal>
+            <Dependent Role="tblProject">
+              <PropertyRef Name="contractManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblProjec__emplo__642DD430">
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="0..1" />
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="employeeId" />
+            </Principal>
+            <Dependent Role="tblProject">
+              <PropertyRef Name="employee1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblProjec__emplo__6521F869">
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="0..1" />
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="employeeId" />
+            </Principal>
+            <Dependent Role="tblProject">
+              <PropertyRef Name="employee2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblProjec__emplo__66161CA2">
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="0..1" />
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="employeeId" />
+            </Principal>
+            <Dependent Role="tblProject">
+              <PropertyRef Name="employee3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblProjec__emplo__670A40DB">
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="0..1" />
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="employeeId" />
+            </Principal>
+            <Dependent Role="tblProject">
+              <PropertyRef Name="employee4" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblProjec__emplo__67FE6514">
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="0..1" />
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="employeeId" />
+            </Principal>
+            <Dependent Role="tblProject">
+              <PropertyRef Name="employee5" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblProjec__leade__6339AFF7">
+          <End Role="tblManager" Type="Self.tblManager" Multiplicity="1" />
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblManager">
+              <PropertyRef Name="managerId" />
+            </Principal>
+            <Dependent Role="tblProject">
+              <PropertyRef Name="leaderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblUser__genderI__43C1049E">
+          <End Role="tblGender" Type="Self.tblGender" Multiplicity="0..1" />
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGender">
+              <PropertyRef Name="genderId" />
+            </Principal>
+            <Dependent Role="tblUser">
+              <PropertyRef Name="genderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblUser__marriag__44B528D7">
+          <End Role="tblMarriageStatus" Type="Self.tblMarriageStatus" Multiplicity="0..1" />
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMarriageStatus">
+              <PropertyRef Name="marriageStatusId" />
+            </Principal>
+            <Dependent Role="tblUser">
+              <PropertyRef Name="marriageStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbFirmModelStoreContainer">
+          <EntitySet Name="tblAdministrator" EntityType="Self.tblAdministrator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAdminType" EntityType="Self.tblAdminType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDailyReport" EntityType="Self.tblDailyReport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEditRequest" EntityType="Self.tblEditRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblGender" EntityType="Self.tblGender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblManager" EntityType="Self.tblManager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMarriageStatus" EntityType="Self.tblMarriageStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPosition" EntityType="Self.tblPosition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProfessionalQualification" EntityType="Self.tblProfessionalQualification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProject" EntityType="Self.tblProject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSector" EntityType="Self.tblSector" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwAdministrator" EntityType="Self.vwAdministrator" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwAdministrator].[userId] AS [userId], 
+    [vwAdministrator].[firstname] AS [firstname], 
+    [vwAdministrator].[lastname] AS [lastname], 
+    [vwAdministrator].[jmbg] AS [jmbg], 
+    [vwAdministrator].[genderId] AS [genderId], 
+    [vwAdministrator].[residence] AS [residence], 
+    [vwAdministrator].[marriageStatusId] AS [marriageStatusId], 
+    [vwAdministrator].[username] AS [username], 
+    [vwAdministrator].[password] AS [password], 
+    [vwAdministrator].[administratorId] AS [administratorId], 
+    [vwAdministrator].[adminTypeId] AS [adminTypeId], 
+    [vwAdministrator].[expiryDate] AS [expiryDate], 
+    [vwAdministrator].[status] AS [status], 
+    [vwAdministrator].[gender] AS [gender], 
+    [vwAdministrator].[typeName] AS [typeName]
+    FROM [dbo].[vwAdministrator] AS [vwAdministrator]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwEmployee" EntityType="Self.vwEmployee" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwEmployee].[userId] AS [userId], 
+    [vwEmployee].[firstname] AS [firstname], 
+    [vwEmployee].[lastname] AS [lastname], 
+    [vwEmployee].[jmbg] AS [jmbg], 
+    [vwEmployee].[genderId] AS [genderId], 
+    [vwEmployee].[residence] AS [residence], 
+    [vwEmployee].[marriageStatusId] AS [marriageStatusId], 
+    [vwEmployee].[username] AS [username], 
+    [vwEmployee].[password] AS [password], 
+    [vwEmployee].[employeeId] AS [employeeId], 
+    [vwEmployee].[managerId] AS [managerId], 
+    [vwEmployee].[positionID] AS [positionID], 
+    [vwEmployee].[qualificationsId] AS [qualificationsId], 
+    [vwEmployee].[Salary] AS [Salary], 
+    [vwEmployee].[sectorId] AS [sectorId], 
+    [vwEmployee].[yearsOfService] AS [yearsOfService], 
+    [vwEmployee].[status] AS [status], 
+    [vwEmployee].[gender] AS [gender], 
+    [vwEmployee].[sectorName] AS [sectorName], 
+    [vwEmployee].[positionName] AS [positionName], 
+    [vwEmployee].[qualification] AS [qualification]
+    FROM [dbo].[vwEmployee] AS [vwEmployee]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwManager" EntityType="Self.vwManager" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwManager].[userId] AS [userId], 
+    [vwManager].[firstname] AS [firstname], 
+    [vwManager].[lastname] AS [lastname], 
+    [vwManager].[jmbg] AS [jmbg], 
+    [vwManager].[genderId] AS [genderId], 
+    [vwManager].[residence] AS [residence], 
+    [vwManager].[marriageStatusId] AS [marriageStatusId], 
+    [vwManager].[username] AS [username], 
+    [vwManager].[password] AS [password], 
+    [vwManager].[backupPassword] AS [backupPassword], 
+    [vwManager].[email] AS [email], 
+    [vwManager].[levelOfResponsibility] AS [levelOfResponsibility], 
+    [vwManager].[managerId] AS [managerId], 
+    [vwManager].[officeNumber] AS [officeNumber], 
+    [vwManager].[salary] AS [salary], 
+    [vwManager].[successfulProjects] AS [successfulProjects], 
+    [vwManager].[status] AS [status], 
+    [vwManager].[gender] AS [gender]
+    FROM [dbo].[vwManager] AS [vwManager]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__tblAdmini__admin__5E74FADA" Association="Self.FK__tblAdmini__admin__5E74FADA">
+            <End Role="tblAdminType" EntitySet="tblAdminType" />
+            <End Role="tblAdministrator" EntitySet="tblAdministrator" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblAdmini__userI__5F691F13" Association="Self.FK__tblAdmini__userI__5F691F13">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblAdministrator" EntitySet="tblAdministrator" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblDailyR__emplo__6BCEF5F8" Association="Self.FK__tblDailyR__emplo__6BCEF5F8">
+            <End Role="tblEmployee" EntitySet="tblEmployee" />
+            <End Role="tblDailyReport" EntitySet="tblDailyReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblDailyR__proje__6CC31A31" Association="Self.FK__tblDailyR__proje__6CC31A31">
+            <End Role="tblProject" EntitySet="tblProject" />
+            <End Role="tblDailyReport" EntitySet="tblDailyReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEditRe__emplo__59B045BD" Association="Self.FK__tblEditRe__emplo__59B045BD">
+            <End Role="tblEmployee" EntitySet="tblEmployee" />
+            <End Role="tblEditRequest" EntitySet="tblEditRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEmploy__manag__56D3D912" Association="Self.FK__tblEmploy__manag__56D3D912">
+            <End Role="tblManager" EntitySet="tblManager" />
+            <End Role="tblEmployee" EntitySet="tblEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEmploy__posit__54EB90A0" Association="Self.FK__tblEmploy__posit__54EB90A0">
+            <End Role="tblPosition" EntitySet="tblPosition" />
+            <End Role="tblEmployee" EntitySet="tblEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEmploy__quali__55DFB4D9" Association="Self.FK__tblEmploy__quali__55DFB4D9">
+            <End Role="tblProfessionalQualification" EntitySet="tblProfessionalQualification" />
+            <End Role="tblEmployee" EntitySet="tblEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEmploy__secto__53F76C67" Association="Self.FK__tblEmploy__secto__53F76C67">
+            <End Role="tblSector" EntitySet="tblSector" />
+            <End Role="tblEmployee" EntitySet="tblEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEmploy__userI__5303482E" Association="Self.FK__tblEmploy__userI__5303482E">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblEmployee" EntitySet="tblEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblManage__userI__5026DB83" Association="Self.FK__tblManage__userI__5026DB83">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblManager" EntitySet="tblManager" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblProjec__contr__62458BBE" Association="Self.FK__tblProjec__contr__62458BBE">
+            <End Role="tblManager" EntitySet="tblManager" />
+            <End Role="tblProject" EntitySet="tblProject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblProjec__emplo__642DD430" Association="Self.FK__tblProjec__emplo__642DD430">
+            <End Role="tblEmployee" EntitySet="tblEmployee" />
+            <End Role="tblProject" EntitySet="tblProject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblProjec__emplo__6521F869" Association="Self.FK__tblProjec__emplo__6521F869">
+            <End Role="tblEmployee" EntitySet="tblEmployee" />
+            <End Role="tblProject" EntitySet="tblProject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblProjec__emplo__66161CA2" Association="Self.FK__tblProjec__emplo__66161CA2">
+            <End Role="tblEmployee" EntitySet="tblEmployee" />
+            <End Role="tblProject" EntitySet="tblProject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblProjec__emplo__670A40DB" Association="Self.FK__tblProjec__emplo__670A40DB">
+            <End Role="tblEmployee" EntitySet="tblEmployee" />
+            <End Role="tblProject" EntitySet="tblProject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblProjec__emplo__67FE6514" Association="Self.FK__tblProjec__emplo__67FE6514">
+            <End Role="tblEmployee" EntitySet="tblEmployee" />
+            <End Role="tblProject" EntitySet="tblProject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblProjec__leade__6339AFF7" Association="Self.FK__tblProjec__leade__6339AFF7">
+            <End Role="tblManager" EntitySet="tblManager" />
+            <End Role="tblProject" EntitySet="tblProject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblUser__genderI__43C1049E" Association="Self.FK__tblUser__genderI__43C1049E">
+            <End Role="tblGender" EntitySet="tblGender" />
+            <End Role="tblUser" EntitySet="tblUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblUser__marriag__44B528D7" Association="Self.FK__tblUser__marriag__44B528D7">
+            <End Role="tblMarriageStatus" EntitySet="tblMarriageStatus" />
+            <End Role="tblUser" EntitySet="tblUser" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbFirmModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblAdministrator">
+          <Key>
+            <PropertyRef Name="administratorId" />
+          </Key>
+          <Property Name="administratorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="expiryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="adminTypeId" Type="Int32" Nullable="false" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblAdminType" Relationship="Self.FK__tblAdmini__admin__5E74FADA" FromRole="tblAdministrator" ToRole="tblAdminType" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblAdmini__userI__5F691F13" FromRole="tblAdministrator" ToRole="tblUser" />
+        </EntityType>
+        <EntityType Name="tblAdminType">
+          <Key>
+            <PropertyRef Name="adminTypeId" />
+          </Key>
+          <Property Name="adminTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblAdministrators" Relationship="Self.FK__tblAdmini__admin__5E74FADA" FromRole="tblAdminType" ToRole="tblAdministrator" />
+        </EntityType>
+        <EntityType Name="tblDailyReport">
+          <Key>
+            <PropertyRef Name="reportId" />
+          </Key>
+          <Property Name="reportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="reportDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="workingHours" Type="Int32" Nullable="false" />
+          <Property Name="employeeId" Type="Int32" />
+          <Property Name="projectId" Type="Int32" />
+          <NavigationProperty Name="tblEmployee" Relationship="Self.FK__tblDailyR__emplo__6BCEF5F8" FromRole="tblDailyReport" ToRole="tblEmployee" />
+          <NavigationProperty Name="tblProject" Relationship="Self.FK__tblDailyR__proje__6CC31A31" FromRole="tblDailyReport" ToRole="tblProject" />
+        </EntityType>
+        <EntityType Name="tblEditRequest">
+          <Key>
+            <PropertyRef Name="requestId" />
+          </Key>
+          <Property Name="requestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employeeId" Type="Int32" />
+          <Property Name="field" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="previousValue" Type="Int32" Nullable="false" />
+          <Property Name="newValue" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="requestDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tblEmployee" Relationship="Self.FK__tblEditRe__emplo__59B045BD" FromRole="tblEditRequest" ToRole="tblEmployee" />
+        </EntityType>
+        <EntityType Name="tblEmployee">
+          <Key>
+            <PropertyRef Name="employeeId" />
+          </Key>
+          <Property Name="employeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="sectorId" Type="Int32" Nullable="false" />
+          <Property Name="positionID" Type="Int32" />
+          <Property Name="yearsOfService" Type="Int32" Nullable="false" />
+          <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="qualificationsId" Type="Int32" Nullable="false" />
+          <Property Name="managerId" Type="Int32" />
+          <NavigationProperty Name="tblDailyReports" Relationship="Self.FK__tblDailyR__emplo__6BCEF5F8" FromRole="tblEmployee" ToRole="tblDailyReport" />
+          <NavigationProperty Name="tblEditRequests" Relationship="Self.FK__tblEditRe__emplo__59B045BD" FromRole="tblEmployee" ToRole="tblEditRequest" />
+          <NavigationProperty Name="tblManager" Relationship="Self.FK__tblEmploy__manag__56D3D912" FromRole="tblEmployee" ToRole="tblManager" />
+          <NavigationProperty Name="tblPosition" Relationship="Self.FK__tblEmploy__posit__54EB90A0" FromRole="tblEmployee" ToRole="tblPosition" />
+          <NavigationProperty Name="tblProfessionalQualification" Relationship="Self.FK__tblEmploy__quali__55DFB4D9" FromRole="tblEmployee" ToRole="tblProfessionalQualification" />
+          <NavigationProperty Name="tblSector" Relationship="Self.FK__tblEmploy__secto__53F76C67" FromRole="tblEmployee" ToRole="tblSector" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblEmploy__userI__5303482E" FromRole="tblEmployee" ToRole="tblUser" />
+          <NavigationProperty Name="tblProjects" Relationship="Self.FK__tblProjec__emplo__642DD430" FromRole="tblEmployee" ToRole="tblProject" />
+          <NavigationProperty Name="tblProjects1" Relationship="Self.FK__tblProjec__emplo__6521F869" FromRole="tblEmployee" ToRole="tblProject" />
+          <NavigationProperty Name="tblProjects2" Relationship="Self.FK__tblProjec__emplo__66161CA2" FromRole="tblEmployee" ToRole="tblProject" />
+          <NavigationProperty Name="tblProjects3" Relationship="Self.FK__tblProjec__emplo__670A40DB" FromRole="tblEmployee" ToRole="tblProject" />
+          <NavigationProperty Name="tblProjects4" Relationship="Self.FK__tblProjec__emplo__67FE6514" FromRole="tblEmployee" ToRole="tblProject" />
+        </EntityType>
+        <EntityType Name="tblGender">
+          <Key>
+            <PropertyRef Name="genderId" />
+          </Key>
+          <Property Name="genderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="symbol" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblUsers" Relationship="Self.FK__tblUser__genderI__43C1049E" FromRole="tblGender" ToRole="tblUser" />
+        </EntityType>
+        <EntityType Name="tblManager">
+          <Key>
+            <PropertyRef Name="managerId" />
+          </Key>
+          <Property Name="managerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="backupPassword" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="levelOfResponsibility" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="successfulProjects" Type="Int32" />
+          <Property Name="salary" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="officeNumber" Type="Int32" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblEmployees" Relationship="Self.FK__tblEmploy__manag__56D3D912" FromRole="tblManager" ToRole="tblEmployee" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblManage__userI__5026DB83" FromRole="tblManager" ToRole="tblUser" />
+          <NavigationProperty Name="tblProjects" Relationship="Self.FK__tblProjec__contr__62458BBE" FromRole="tblManager" ToRole="tblProject" />
+          <NavigationProperty Name="tblProjects1" Relationship="Self.FK__tblProjec__leade__6339AFF7" FromRole="tblManager" ToRole="tblProject" />
+        </EntityType>
+        <EntityType Name="tblMarriageStatu">
+          <Key>
+            <PropertyRef Name="marriageStatusId" />
+          </Key>
+          <Property Name="marriageStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblUsers" Relationship="Self.FK__tblUser__marriag__44B528D7" FromRole="tblMarriageStatus" ToRole="tblUser" />
+        </EntityType>
+        <EntityType Name="tblPosition">
+          <Key>
+            <PropertyRef Name="positionId" />
+          </Key>
+          <Property Name="positionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblEmployees" Relationship="Self.FK__tblEmploy__posit__54EB90A0" FromRole="tblPosition" ToRole="tblEmployee" />
+        </EntityType>
+        <EntityType Name="tblProfessionalQualification">
+          <Key>
+            <PropertyRef Name="qualificationsId" />
+          </Key>
+          <Property Name="qualificationsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="symbol" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblEmployees" Relationship="Self.FK__tblEmploy__quali__55DFB4D9" FromRole="tblProfessionalQualification" ToRole="tblEmployee" />
+        </EntityType>
+        <EntityType Name="tblProject">
+          <Key>
+            <PropertyRef Name="projectId" />
+          </Key>
+          <Property Name="projectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="projectName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="clientName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contractDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="contractManagerId" Type="Int32" Nullable="false" />
+          <Property Name="startingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="deadline" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hourlyRate" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="realisation" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="leaderId" Type="Int32" Nullable="false" />
+          <Property Name="employee1" Type="Int32" />
+          <Property Name="employee2" Type="Int32" />
+          <Property Name="employee3" Type="Int32" />
+          <Property Name="employee4" Type="Int32" />
+          <Property Name="employee5" Type="Int32" />
+          <NavigationProperty Name="tblDailyReports" Relationship="Self.FK__tblDailyR__proje__6CC31A31" FromRole="tblProject" ToRole="tblDailyReport" />
+          <NavigationProperty Name="tblEmployee" Relationship="Self.FK__tblProjec__emplo__642DD430" FromRole="tblProject" ToRole="tblEmployee" />
+          <NavigationProperty Name="tblEmployee1" Relationship="Self.FK__tblProjec__emplo__6521F869" FromRole="tblProject" ToRole="tblEmployee" />
+          <NavigationProperty Name="tblEmployee2" Relationship="Self.FK__tblProjec__emplo__66161CA2" FromRole="tblProject" ToRole="tblEmployee" />
+          <NavigationProperty Name="tblEmployee3" Relationship="Self.FK__tblProjec__emplo__670A40DB" FromRole="tblProject" ToRole="tblEmployee" />
+          <NavigationProperty Name="tblEmployee4" Relationship="Self.FK__tblProjec__emplo__67FE6514" FromRole="tblProject" ToRole="tblEmployee" />
+          <NavigationProperty Name="tblManager" Relationship="Self.FK__tblProjec__contr__62458BBE" FromRole="tblProject" ToRole="tblManager" />
+          <NavigationProperty Name="tblManager1" Relationship="Self.FK__tblProjec__leade__6339AFF7" FromRole="tblProject" ToRole="tblManager" />
+        </EntityType>
+        <EntityType Name="tblSector">
+          <Key>
+            <PropertyRef Name="sectorId" />
+          </Key>
+          <Property Name="sectorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblEmployees" Relationship="Self.FK__tblEmploy__secto__53F76C67" FromRole="tblSector" ToRole="tblEmployee" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="jmbg" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="genderId" Type="Int32" />
+          <Property Name="residence" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="marriageStatusId" Type="Int32" />
+          <Property Name="username" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblAdministrators" Relationship="Self.FK__tblAdmini__userI__5F691F13" FromRole="tblUser" ToRole="tblAdministrator" />
+          <NavigationProperty Name="tblEmployees" Relationship="Self.FK__tblEmploy__userI__5303482E" FromRole="tblUser" ToRole="tblEmployee" />
+          <NavigationProperty Name="tblGender" Relationship="Self.FK__tblUser__genderI__43C1049E" FromRole="tblUser" ToRole="tblGender" />
+          <NavigationProperty Name="tblManagers" Relationship="Self.FK__tblManage__userI__5026DB83" FromRole="tblUser" ToRole="tblManager" />
+          <NavigationProperty Name="tblMarriageStatu" Relationship="Self.FK__tblUser__marriag__44B528D7" FromRole="tblUser" ToRole="tblMarriageStatus" />
+        </EntityType>
+        <EntityType Name="vwAdministrator">
+          <Key>
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="firstname" />
+            <PropertyRef Name="lastname" />
+            <PropertyRef Name="jmbg" />
+            <PropertyRef Name="residence" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="password" />
+            <PropertyRef Name="administratorId" />
+            <PropertyRef Name="adminTypeId" />
+            <PropertyRef Name="expiryDate" />
+            <PropertyRef Name="status" />
+            <PropertyRef Name="gender" />
+            <PropertyRef Name="typeName" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="firstname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="jmbg" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="genderId" Type="Int32" />
+          <Property Name="residence" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="marriageStatusId" Type="Int32" />
+          <Property Name="username" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="administratorId" Type="Int32" Nullable="false" />
+          <Property Name="adminTypeId" Type="Int32" Nullable="false" />
+          <Property Name="expiryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="status" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="typeName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwEmployee">
+          <Key>
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="firstname" />
+            <PropertyRef Name="lastname" />
+            <PropertyRef Name="jmbg" />
+            <PropertyRef Name="residence" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="password" />
+            <PropertyRef Name="employeeId" />
+            <PropertyRef Name="qualificationsId" />
+            <PropertyRef Name="sectorId" />
+            <PropertyRef Name="yearsOfService" />
+            <PropertyRef Name="status" />
+            <PropertyRef Name="gender" />
+            <PropertyRef Name="sectorName" />
+            <PropertyRef Name="positionName" />
+            <PropertyRef Name="qualification" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="firstname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="jmbg" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="genderId" Type="Int32" />
+          <Property Name="residence" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="marriageStatusId" Type="Int32" />
+          <Property Name="username" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="employeeId" Type="Int32" Nullable="false" />
+          <Property Name="managerId" Type="Int32" />
+          <Property Name="positionID" Type="Int32" />
+          <Property Name="qualificationsId" Type="Int32" Nullable="false" />
+          <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="sectorId" Type="Int32" Nullable="false" />
+          <Property Name="yearsOfService" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="sectorName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="positionName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="qualification" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwManager">
+          <Key>
+            <PropertyRef Name="userId" />
+            <PropertyRef Name="firstname" />
+            <PropertyRef Name="lastname" />
+            <PropertyRef Name="jmbg" />
+            <PropertyRef Name="residence" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="password" />
+            <PropertyRef Name="backupPassword" />
+            <PropertyRef Name="email" />
+            <PropertyRef Name="managerId" />
+            <PropertyRef Name="status" />
+            <PropertyRef Name="gender" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="firstname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="jmbg" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="genderId" Type="Int32" />
+          <Property Name="residence" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="marriageStatusId" Type="Int32" />
+          <Property Name="username" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="backupPassword" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="levelOfResponsibility" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="managerId" Type="Int32" Nullable="false" />
+          <Property Name="officeNumber" Type="Int32" />
+          <Property Name="salary" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="successfulProjects" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tblAdmini__admin__5E74FADA">
+          <End Role="tblAdminType" Type="Self.tblAdminType" Multiplicity="1" />
+          <End Role="tblAdministrator" Type="Self.tblAdministrator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAdminType">
+              <PropertyRef Name="adminTypeId" />
+            </Principal>
+            <Dependent Role="tblAdministrator">
+              <PropertyRef Name="adminTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblAdmini__userI__5F691F13">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblAdministrator" Type="Self.tblAdministrator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="tblAdministrator">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblDailyR__emplo__6BCEF5F8">
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="0..1" />
+          <End Role="tblDailyReport" Type="Self.tblDailyReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="employeeId" />
+            </Principal>
+            <Dependent Role="tblDailyReport">
+              <PropertyRef Name="employeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblDailyR__proje__6CC31A31">
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="0..1" />
+          <End Role="tblDailyReport" Type="Self.tblDailyReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProject">
+              <PropertyRef Name="projectId" />
+            </Principal>
+            <Dependent Role="tblDailyReport">
+              <PropertyRef Name="projectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEditRe__emplo__59B045BD">
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="0..1" />
+          <End Role="tblEditRequest" Type="Self.tblEditRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="employeeId" />
+            </Principal>
+            <Dependent Role="tblEditRequest">
+              <PropertyRef Name="employeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEmploy__manag__56D3D912">
+          <End Role="tblManager" Type="Self.tblManager" Multiplicity="0..1" />
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblManager">
+              <PropertyRef Name="managerId" />
+            </Principal>
+            <Dependent Role="tblEmployee">
+              <PropertyRef Name="managerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEmploy__posit__54EB90A0">
+          <End Role="tblPosition" Type="Self.tblPosition" Multiplicity="0..1" />
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPosition">
+              <PropertyRef Name="positionId" />
+            </Principal>
+            <Dependent Role="tblEmployee">
+              <PropertyRef Name="positionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEmploy__quali__55DFB4D9">
+          <End Role="tblProfessionalQualification" Type="Self.tblProfessionalQualification" Multiplicity="1" />
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProfessionalQualification">
+              <PropertyRef Name="qualificationsId" />
+            </Principal>
+            <Dependent Role="tblEmployee">
+              <PropertyRef Name="qualificationsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEmploy__secto__53F76C67">
+          <End Role="tblSector" Type="Self.tblSector" Multiplicity="1" />
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSector">
+              <PropertyRef Name="sectorId" />
+            </Principal>
+            <Dependent Role="tblEmployee">
+              <PropertyRef Name="sectorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEmploy__userI__5303482E">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="tblEmployee">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblProjec__emplo__642DD430">
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="0..1" />
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="employeeId" />
+            </Principal>
+            <Dependent Role="tblProject">
+              <PropertyRef Name="employee1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblProjec__emplo__6521F869">
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="0..1" />
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="employeeId" />
+            </Principal>
+            <Dependent Role="tblProject">
+              <PropertyRef Name="employee2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblProjec__emplo__66161CA2">
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="0..1" />
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="employeeId" />
+            </Principal>
+            <Dependent Role="tblProject">
+              <PropertyRef Name="employee3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblProjec__emplo__670A40DB">
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="0..1" />
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="employeeId" />
+            </Principal>
+            <Dependent Role="tblProject">
+              <PropertyRef Name="employee4" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblProjec__emplo__67FE6514">
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="0..1" />
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="employeeId" />
+            </Principal>
+            <Dependent Role="tblProject">
+              <PropertyRef Name="employee5" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblUser__genderI__43C1049E">
+          <End Role="tblGender" Type="Self.tblGender" Multiplicity="0..1" />
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGender">
+              <PropertyRef Name="genderId" />
+            </Principal>
+            <Dependent Role="tblUser">
+              <PropertyRef Name="genderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblManage__userI__5026DB83">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblManager" Type="Self.tblManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="tblManager">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblProjec__contr__62458BBE">
+          <End Role="tblManager" Type="Self.tblManager" Multiplicity="1" />
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblManager">
+              <PropertyRef Name="managerId" />
+            </Principal>
+            <Dependent Role="tblProject">
+              <PropertyRef Name="contractManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblProjec__leade__6339AFF7">
+          <End Role="tblManager" Type="Self.tblManager" Multiplicity="1" />
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblManager">
+              <PropertyRef Name="managerId" />
+            </Principal>
+            <Dependent Role="tblProject">
+              <PropertyRef Name="leaderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblUser__marriag__44B528D7">
+          <End Role="tblMarriageStatus" Type="Self.tblMarriageStatu" Multiplicity="0..1" />
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMarriageStatus">
+              <PropertyRef Name="marriageStatusId" />
+            </Principal>
+            <Dependent Role="tblUser">
+              <PropertyRef Name="marriageStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbFirmEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblAdministrators" EntityType="Self.tblAdministrator" />
+          <EntitySet Name="tblAdminTypes" EntityType="Self.tblAdminType" />
+          <EntitySet Name="tblDailyReports" EntityType="Self.tblDailyReport" />
+          <EntitySet Name="tblEditRequests" EntityType="Self.tblEditRequest" />
+          <EntitySet Name="tblEmployees" EntityType="Self.tblEmployee" />
+          <EntitySet Name="tblGenders" EntityType="Self.tblGender" />
+          <EntitySet Name="tblManagers" EntityType="Self.tblManager" />
+          <EntitySet Name="tblMarriageStatus" EntityType="Self.tblMarriageStatu" />
+          <EntitySet Name="tblPositions" EntityType="Self.tblPosition" />
+          <EntitySet Name="tblProfessionalQualifications" EntityType="Self.tblProfessionalQualification" />
+          <EntitySet Name="tblProjects" EntityType="Self.tblProject" />
+          <EntitySet Name="tblSectors" EntityType="Self.tblSector" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+          <EntitySet Name="vwAdministrators" EntityType="Self.vwAdministrator" />
+          <EntitySet Name="vwEmployees" EntityType="Self.vwEmployee" />
+          <EntitySet Name="vwManagers" EntityType="Self.vwManager" />
+          <AssociationSet Name="FK__tblAdmini__admin__5E74FADA" Association="Self.FK__tblAdmini__admin__5E74FADA">
+            <End Role="tblAdminType" EntitySet="tblAdminTypes" />
+            <End Role="tblAdministrator" EntitySet="tblAdministrators" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblAdmini__userI__5F691F13" Association="Self.FK__tblAdmini__userI__5F691F13">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblAdministrator" EntitySet="tblAdministrators" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblDailyR__emplo__6BCEF5F8" Association="Self.FK__tblDailyR__emplo__6BCEF5F8">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblDailyReport" EntitySet="tblDailyReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblDailyR__proje__6CC31A31" Association="Self.FK__tblDailyR__proje__6CC31A31">
+            <End Role="tblProject" EntitySet="tblProjects" />
+            <End Role="tblDailyReport" EntitySet="tblDailyReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEditRe__emplo__59B045BD" Association="Self.FK__tblEditRe__emplo__59B045BD">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblEditRequest" EntitySet="tblEditRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEmploy__manag__56D3D912" Association="Self.FK__tblEmploy__manag__56D3D912">
+            <End Role="tblManager" EntitySet="tblManagers" />
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEmploy__posit__54EB90A0" Association="Self.FK__tblEmploy__posit__54EB90A0">
+            <End Role="tblPosition" EntitySet="tblPositions" />
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEmploy__quali__55DFB4D9" Association="Self.FK__tblEmploy__quali__55DFB4D9">
+            <End Role="tblProfessionalQualification" EntitySet="tblProfessionalQualifications" />
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEmploy__secto__53F76C67" Association="Self.FK__tblEmploy__secto__53F76C67">
+            <End Role="tblSector" EntitySet="tblSectors" />
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEmploy__userI__5303482E" Association="Self.FK__tblEmploy__userI__5303482E">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblProjec__emplo__642DD430" Association="Self.FK__tblProjec__emplo__642DD430">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblProject" EntitySet="tblProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblProjec__emplo__6521F869" Association="Self.FK__tblProjec__emplo__6521F869">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblProject" EntitySet="tblProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblProjec__emplo__66161CA2" Association="Self.FK__tblProjec__emplo__66161CA2">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblProject" EntitySet="tblProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblProjec__emplo__670A40DB" Association="Self.FK__tblProjec__emplo__670A40DB">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblProject" EntitySet="tblProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblProjec__emplo__67FE6514" Association="Self.FK__tblProjec__emplo__67FE6514">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblProject" EntitySet="tblProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblUser__genderI__43C1049E" Association="Self.FK__tblUser__genderI__43C1049E">
+            <End Role="tblGender" EntitySet="tblGenders" />
+            <End Role="tblUser" EntitySet="tblUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblManage__userI__5026DB83" Association="Self.FK__tblManage__userI__5026DB83">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblManager" EntitySet="tblManagers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblProjec__contr__62458BBE" Association="Self.FK__tblProjec__contr__62458BBE">
+            <End Role="tblManager" EntitySet="tblManagers" />
+            <End Role="tblProject" EntitySet="tblProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblProjec__leade__6339AFF7" Association="Self.FK__tblProjec__leade__6339AFF7">
+            <End Role="tblManager" EntitySet="tblManagers" />
+            <End Role="tblProject" EntitySet="tblProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblUser__marriag__44B528D7" Association="Self.FK__tblUser__marriag__44B528D7">
+            <End Role="tblMarriageStatus" EntitySet="tblMarriageStatus" />
+            <End Role="tblUser" EntitySet="tblUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbFirmModelStoreContainer" CdmEntityContainer="dbFirmEntities">
+          <EntitySetMapping Name="tblAdministrators">
+            <EntityTypeMapping TypeName="dbFirmModel.tblAdministrator">
+              <MappingFragment StoreEntitySet="tblAdministrator">
+                <ScalarProperty Name="administratorId" ColumnName="administratorId" />
+                <ScalarProperty Name="expiryDate" ColumnName="expiryDate" />
+                <ScalarProperty Name="adminTypeId" ColumnName="adminTypeId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAdminTypes">
+            <EntityTypeMapping TypeName="dbFirmModel.tblAdminType">
+              <MappingFragment StoreEntitySet="tblAdminType">
+                <ScalarProperty Name="adminTypeId" ColumnName="adminTypeId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblDailyReports">
+            <EntityTypeMapping TypeName="dbFirmModel.tblDailyReport">
+              <MappingFragment StoreEntitySet="tblDailyReport">
+                <ScalarProperty Name="reportId" ColumnName="reportId" />
+                <ScalarProperty Name="reportDate" ColumnName="reportDate" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="workingHours" ColumnName="workingHours" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+                <ScalarProperty Name="projectId" ColumnName="projectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEditRequests">
+            <EntityTypeMapping TypeName="dbFirmModel.tblEditRequest">
+              <MappingFragment StoreEntitySet="tblEditRequest">
+                <ScalarProperty Name="requestId" ColumnName="requestId" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+                <ScalarProperty Name="field" ColumnName="field" />
+                <ScalarProperty Name="previousValue" ColumnName="previousValue" />
+                <ScalarProperty Name="newValue" ColumnName="newValue" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="requestDate" ColumnName="requestDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEmployees">
+            <EntityTypeMapping TypeName="dbFirmModel.tblEmployee">
+              <MappingFragment StoreEntitySet="tblEmployee">
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="sectorId" ColumnName="sectorId" />
+                <ScalarProperty Name="positionID" ColumnName="positionID" />
+                <ScalarProperty Name="yearsOfService" ColumnName="yearsOfService" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="qualificationsId" ColumnName="qualificationsId" />
+                <ScalarProperty Name="managerId" ColumnName="managerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblGenders">
+            <EntityTypeMapping TypeName="dbFirmModel.tblGender">
+              <MappingFragment StoreEntitySet="tblGender">
+                <ScalarProperty Name="genderId" ColumnName="genderId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="symbol" ColumnName="symbol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblManagers">
+            <EntityTypeMapping TypeName="dbFirmModel.tblManager">
+              <MappingFragment StoreEntitySet="tblManager">
+                <ScalarProperty Name="managerId" ColumnName="managerId" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="backupPassword" ColumnName="backupPassword" />
+                <ScalarProperty Name="levelOfResponsibility" ColumnName="levelOfResponsibility" />
+                <ScalarProperty Name="successfulProjects" ColumnName="successfulProjects" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="officeNumber" ColumnName="officeNumber" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMarriageStatus">
+            <EntityTypeMapping TypeName="dbFirmModel.tblMarriageStatu">
+              <MappingFragment StoreEntitySet="tblMarriageStatus">
+                <ScalarProperty Name="marriageStatusId" ColumnName="marriageStatusId" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPositions">
+            <EntityTypeMapping TypeName="dbFirmModel.tblPosition">
+              <MappingFragment StoreEntitySet="tblPosition">
+                <ScalarProperty Name="positionId" ColumnName="positionId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProfessionalQualifications">
+            <EntityTypeMapping TypeName="dbFirmModel.tblProfessionalQualification">
+              <MappingFragment StoreEntitySet="tblProfessionalQualification">
+                <ScalarProperty Name="qualificationsId" ColumnName="qualificationsId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="symbol" ColumnName="symbol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProjects">
+            <EntityTypeMapping TypeName="dbFirmModel.tblProject">
+              <MappingFragment StoreEntitySet="tblProject">
+                <ScalarProperty Name="projectId" ColumnName="projectId" />
+                <ScalarProperty Name="projectName" ColumnName="projectName" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="clientName" ColumnName="clientName" />
+                <ScalarProperty Name="contractDate" ColumnName="contractDate" />
+                <ScalarProperty Name="contractManagerId" ColumnName="contractManagerId" />
+                <ScalarProperty Name="startingDate" ColumnName="startingDate" />
+                <ScalarProperty Name="deadline" ColumnName="deadline" />
+                <ScalarProperty Name="hourlyRate" ColumnName="hourlyRate" />
+                <ScalarProperty Name="realisation" ColumnName="realisation" />
+                <ScalarProperty Name="leaderId" ColumnName="leaderId" />
+                <ScalarProperty Name="employee1" ColumnName="employee1" />
+                <ScalarProperty Name="employee2" ColumnName="employee2" />
+                <ScalarProperty Name="employee3" ColumnName="employee3" />
+                <ScalarProperty Name="employee4" ColumnName="employee4" />
+                <ScalarProperty Name="employee5" ColumnName="employee5" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSectors">
+            <EntityTypeMapping TypeName="dbFirmModel.tblSector">
+              <MappingFragment StoreEntitySet="tblSector">
+                <ScalarProperty Name="sectorId" ColumnName="sectorId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="dbFirmModel.tblUser">
+              <MappingFragment StoreEntitySet="tblUser">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="jmbg" ColumnName="jmbg" />
+                <ScalarProperty Name="genderId" ColumnName="genderId" />
+                <ScalarProperty Name="residence" ColumnName="residence" />
+                <ScalarProperty Name="marriageStatusId" ColumnName="marriageStatusId" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwAdministrators">
+            <EntityTypeMapping TypeName="dbFirmModel.vwAdministrator">
+              <MappingFragment StoreEntitySet="vwAdministrator">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="jmbg" ColumnName="jmbg" />
+                <ScalarProperty Name="genderId" ColumnName="genderId" />
+                <ScalarProperty Name="residence" ColumnName="residence" />
+                <ScalarProperty Name="marriageStatusId" ColumnName="marriageStatusId" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="administratorId" ColumnName="administratorId" />
+                <ScalarProperty Name="adminTypeId" ColumnName="adminTypeId" />
+                <ScalarProperty Name="expiryDate" ColumnName="expiryDate" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="typeName" ColumnName="typeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwEmployees">
+            <EntityTypeMapping TypeName="dbFirmModel.vwEmployee">
+              <MappingFragment StoreEntitySet="vwEmployee">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="jmbg" ColumnName="jmbg" />
+                <ScalarProperty Name="genderId" ColumnName="genderId" />
+                <ScalarProperty Name="residence" ColumnName="residence" />
+                <ScalarProperty Name="marriageStatusId" ColumnName="marriageStatusId" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+                <ScalarProperty Name="managerId" ColumnName="managerId" />
+                <ScalarProperty Name="positionID" ColumnName="positionID" />
+                <ScalarProperty Name="qualificationsId" ColumnName="qualificationsId" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="sectorId" ColumnName="sectorId" />
+                <ScalarProperty Name="yearsOfService" ColumnName="yearsOfService" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="sectorName" ColumnName="sectorName" />
+                <ScalarProperty Name="positionName" ColumnName="positionName" />
+                <ScalarProperty Name="qualification" ColumnName="qualification" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwManagers">
+            <EntityTypeMapping TypeName="dbFirmModel.vwManager">
+              <MappingFragment StoreEntitySet="vwManager">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="jmbg" ColumnName="jmbg" />
+                <ScalarProperty Name="genderId" ColumnName="genderId" />
+                <ScalarProperty Name="residence" ColumnName="residence" />
+                <ScalarProperty Name="marriageStatusId" ColumnName="marriageStatusId" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="backupPassword" ColumnName="backupPassword" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="levelOfResponsibility" ColumnName="levelOfResponsibility" />
+                <ScalarProperty Name="managerId" ColumnName="managerId" />
+                <ScalarProperty Name="officeNumber" ColumnName="officeNumber" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="successfulProjects" ColumnName="successfulProjects" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
