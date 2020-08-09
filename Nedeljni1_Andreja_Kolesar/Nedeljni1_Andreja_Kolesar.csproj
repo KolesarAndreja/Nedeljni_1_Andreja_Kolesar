@@ -134,6 +134,8 @@
     <Compile Include="Validation\ValidJmbg.cs" />
     <Compile Include="Validation\ValidMail.cs" />
     <Compile Include="Validation\ValidUsername.cs" />
+    <Compile Include="ViewModel\AddPositionViewModel.cs" />
+    <Compile Include="ViewModel\AddSectorViewModel.cs" />
     <Compile Include="ViewModel\AssignLevelViewModel.cs" />
     <Compile Include="ViewModel\EditDateViewModel.cs" />
     <Compile Include="ViewModel\EmployeeViewModel.cs" />
@@ -143,7 +145,14 @@
     <Compile Include="ViewModel\OwnerViewModel.cs" />
     <Compile Include="ViewModel\RegistrationAdministratorViewModel.cs" />
     <Compile Include="ViewModel\RegistrationViewModel.cs" />
+    <Compile Include="ViewModel\SystemAdministratorViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\AddPosition.xaml.cs">
+      <DependentUpon>AddPosition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddSector.xaml.cs">
+      <DependentUpon>AddSector.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AssignLevel.xaml.cs">
       <DependentUpon>AssignLevel.xaml</DependentUpon>
     </Compile>
@@ -175,6 +184,9 @@
     <Compile Include="View\RegistrationAdministrator.xaml.cs">
       <DependentUpon>RegistrationAdministrator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SystemAdministrator.xaml.cs">
+      <DependentUpon>SystemAdministrator.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -188,6 +200,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\AddPosition.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddSector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AssignLevel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -225,6 +245,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RegistrationAdministrator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SystemAdministrator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

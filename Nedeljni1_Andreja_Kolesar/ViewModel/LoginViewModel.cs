@@ -97,7 +97,9 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
                         }
                         else
                         {
-
+                            SystemAdministrator sa = new SystemAdministrator();
+                            login.Close();
+                            sa.ShowDialog();
                         }
                     }
                     else if (Service.Service.isEmployee(user) != null)

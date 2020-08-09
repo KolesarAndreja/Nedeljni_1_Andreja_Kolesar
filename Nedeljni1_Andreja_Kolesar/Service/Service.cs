@@ -338,6 +338,34 @@ namespace Nedeljni1_Andreja_Kolesar.Service
             }
         }
         #endregion
+        #region ADD SECTOR
+
+        public static tblSector AddSector(tblSector sector)
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    if (sector.sectorId == 0)
+                    {
+                        //add 
+                        tblSector newSector = new tblSector();
+                        newSector.name = sector.name;
+                        newSector.description = sector.description;
+                        context.tblSectors.Add(newSector);
+                        context.SaveChanges();
+                        sector.sectorId = newSector.sectorId;
+                    }
+                    return sector;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception: " + ex.Message.ToString());
+                return null;
+            }
+        }
+        #endregion
 
         #region ADD EMPLOYEE
         public static tblEmployee AddEmployee(tblEmployee employee)

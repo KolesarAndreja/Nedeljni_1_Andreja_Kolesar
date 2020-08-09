@@ -1,0 +1,68 @@
+﻿<Window x:Class="Nedeljni1_Andreja_Kolesar.View.SystemAdministrator"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Nedeljni1_Andreja_Kolesar.View"
+        mc:Ignorable="d"
+        Title="SystemAdministrator"
+        Height="450"
+        Width="800">
+    <Grid>
+        <Button Content="Log Out"
+                Command="{Binding logOut, UpdateSourceTrigger=PropertyChanged}"
+                HorizontalAlignment="Left"
+                Height="20"
+                Margin="560,40,0,0"
+                VerticalAlignment="Top"
+                Width="140" />
+        <Button Content="Add Position"
+                Command="{Binding addPosition, UpdateSourceTrigger=PropertyChanged}"
+                HorizontalAlignment="Left"
+                Margin="65,40,0,0"
+                VerticalAlignment="Top"
+                Width="140" />
+        <Button Content="Add Sector"
+                Command="{Binding addSector, UpdateSourceTrigger=PropertyChanged}"
+                HorizontalAlignment="Left"
+                Margin="65,80,0,0"
+                VerticalAlignment="Top"
+                Width="140" />
+        <DataGrid Name="DataGridAllAdmins"
+                  ItemsSource="{Binding sectorList, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding selectedSector, UpdateSourceTrigger=PropertyChanged}"
+                  IsReadOnly="True"
+                  HeadersVisibility="Column"
+                  AutoGenerateColumns="False"
+                  HorizontalGridLinesBrush="Black"
+                  BorderBrush="Black"
+                  Foreground="Black"
+                  FontWeight="Bold"
+                  Margin="55,146,392,24">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Sector name"
+                                    Binding="{Binding name}" />
+                <DataGridTextColumn Header="Description"
+                                    Binding="{Binding description}" />
+                
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="btnDelete"
+                                    Content="Delete"
+                                    Command="{Binding DataContext.deleteSector, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                    Margin="4"
+                                    FontWeight="Bold" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="SECTOR LIST:"
+               HorizontalAlignment="Left"
+               Margin="55,120,0,0"
+               VerticalAlignment="Top"
+               Width="160"
+               FontWeight="Bold" />
+    </Grid>
+</Window>
