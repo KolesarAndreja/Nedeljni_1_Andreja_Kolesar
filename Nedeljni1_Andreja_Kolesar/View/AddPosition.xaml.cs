@@ -11,7 +11,7 @@ namespace Nedeljni1_Andreja_Kolesar.View
         public AddPosition()
         {
             InitializeComponent();
-            //this.DataContext = new AddPositionViewModel(this);
+            this.DataContext = new AddPositionViewModel(this);
         }
     }
 }

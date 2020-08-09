@@ -7,6 +7,35 @@
         mc:Ignorable="d"
         Title="AddPosition" Height="450" Width="800">
     <Grid>
-        
+        <Label Content="Position name:"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="105,53,0,0"
+               Width="95" />
+        <Button Content="Save"
+                Command="{Binding save, UpdateSourceTrigger=PropertyChanged}"
+                HorizontalAlignment="Left"
+                Margin="200,140,0,0"
+                VerticalAlignment="Top"
+                Width="75" />
+        <TextBox HorizontalAlignment="Left"
+                 Text="{Binding position.name, UpdateSourceTrigger=PropertyChanged}"
+                 Height="23"
+                 Margin="220,53,0,0"
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Top"
+                 Width="157" />
+        <Label Content="Position description:"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="105,90,0,0"
+               Width="125" />
+        <TextBox HorizontalAlignment="Left"
+                 Text="{Binding position.description, UpdateSourceTrigger=PropertyChanged}"
+                 Height="23"
+                 Margin="220,90,0,0"
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Top"
+                 Width="157" />
     </Grid>
 </Window>

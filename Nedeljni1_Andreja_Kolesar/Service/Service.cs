@@ -385,6 +385,34 @@ namespace Nedeljni1_Andreja_Kolesar.Service
         }
         #endregion
 
+        #region ADD POSITION
+        public static tblPosition AddPosition(tblPosition position)
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    if (position.positionId == 0)
+                    {
+                        //add 
+                        tblPosition newPosition = new tblPosition();
+                        newPosition.name = position.name;
+                        newPosition.description = position.description;
+                        context.tblPositions.Add(newPosition);
+                        context.SaveChanges();
+                        position.positionId = newPosition.positionId;
+                    }
+                    return position;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception: " + ex.Message.ToString());
+                return null;
+            }
+        }
+        #endregion
+
         #region ADD EMPLOYEE
         public static tblEmployee AddEmployee(tblEmployee employee)
         {
