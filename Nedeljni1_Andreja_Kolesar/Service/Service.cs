@@ -244,6 +244,23 @@ namespace Nedeljni1_Andreja_Kolesar.Service
                 return true;
             }
         }
+
+        public static List<tblEmployee> UsedSector(tblSector sector)
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    List<tblEmployee> list = (from x in context.tblEmployees where x.sectorId == sector.sectorId select x).ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception " + ex.Message.ToString());
+                return null;
+            }
+        }
         #endregion
 
         #region ADD USER
@@ -338,6 +355,7 @@ namespace Nedeljni1_Andreja_Kolesar.Service
             }
         }
         #endregion
+
         #region ADD SECTOR
 
         public static tblSector AddSector(tblSector sector)
@@ -595,6 +613,38 @@ namespace Nedeljni1_Andreja_Kolesar.Service
             {
                 System.Diagnostics.Debug.WriteLine("Exception " + ex.Message.ToString());
                 return null;
+            }
+        }
+        #endregion
+
+        #region delete sector
+        public static void DeleteSector(tblSector sector)
+        {
+            try
+            {
+                using (dbFirmEntities context = new dbFirmEntities())
+                {
+                    tblSector sectorToDelete = (from u in context.tblSectors where u.sectorId == sector.sectorId select u).First();
+                    //check if some employee uses this sector. Get list of all employees with this sectorId
+                    List<tblEmployee> list = UsedSector(sector);
+                    //if list is not empty, update users with default sector
+                    if (list.Count > 0)
+                    {
+                        tblEmployee employeeToEdit;
+                        for(int i=0; i<list.Count; i++)
+                        {
+                            employeeToEdit = list[i];
+                            employeeToEdit.sectorId = 1;
+                            AddEmployee(employeeToEdit);
+                        }
+                    }
+                    context.tblSectors.Remove(sectorToDelete);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
             }
         }
         #endregion

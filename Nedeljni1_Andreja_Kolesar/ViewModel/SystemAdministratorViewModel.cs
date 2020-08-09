@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace Nedeljni1_Andreja_Kolesar.ViewModel
 {
-    class SystemAdministratorViewModel:ViewModelBase
+    class SystemAdministratorViewModel : ViewModelBase
     {
         #region property
         SystemAdministrator sa;
@@ -156,5 +156,43 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
             return true;
         }
         #endregion
+
+        #region delete sector
+        private ICommand _deleteSector;
+        public ICommand deleteSector
+        {
+            get
+            {
+                if (_deleteSector == null)
+                {
+                    _deleteSector = new Command.RelayCommand(param => ArchiveExecute(), param => CanArchiveExecute());
+                }
+                return _deleteSector;
+            }
+        }
+
+        private void ArchiveExecute()
+        {
+            try
+            {
+                MessageBoxResult result = MessageBox.Show("Do you realy want to delete this sector?", "Delete Sector", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    Service.Service.DeleteSector(selectedSector);
+                    sectorList = Service.Service.GetSectorList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        private bool CanArchiveExecute()
+        {
+            return true;
+
+        }
+        #endregion
     }
+
 }
