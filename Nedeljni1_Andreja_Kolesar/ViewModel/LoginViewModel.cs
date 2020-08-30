@@ -82,25 +82,33 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
                 {
                     if (Service.Service.isAdministrator(user) != null)
                     {
+                        
                         tblAdministrator a = Service.Service.isAdministrator(user);
-                        string type = Service.Service.TypeOfAdmin(a);
-                        if (type == "Local")
+                        if (a.expiryDate < DateTime.Now)
                         {
-                            LocalAdministrator la = new LocalAdministrator();
-                            login.Close();
-                            la.ShowDialog();
-                           
-                        }
-                        else if (type == "Team")
-                        {
-                            TeamAdministrator ta = new TeamAdministrator();
-                            ta.ShowDialog();
+                            MessageBox.Show("The expiration date of your access has expired. Please conntact the company mannagment");
                         }
                         else
                         {
-                            SystemAdministrator sa = new SystemAdministrator();
-                            login.Close();
-                            sa.ShowDialog();
+                            string type = Service.Service.TypeOfAdmin(a);
+                            if (type == "Local")
+                            {
+                                LocalAdministrator la = new LocalAdministrator();
+                                login.Close();
+                                la.ShowDialog();
+
+                            }
+                            else if (type == "Team")
+                            {
+                                TeamAdministrator ta = new TeamAdministrator();
+                                ta.ShowDialog();
+                            }
+                            else
+                            {
+                                SystemAdministrator sa = new SystemAdministrator();
+                                login.Close();
+                                sa.ShowDialog();
+                            }
                         }
                     }
                     else if (Service.Service.isEmployee(user) != null)

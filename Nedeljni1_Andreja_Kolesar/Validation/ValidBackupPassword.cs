@@ -11,7 +11,7 @@ namespace Nedeljni1_Andreja_Kolesar.Validation
 
             if (backup.Length<5)
             {
-                return new ValidationResult(false, "must be at least 5 letters");
+                return new ValidationResult(false, "must be at least 5 characters");
             }
             else
             {

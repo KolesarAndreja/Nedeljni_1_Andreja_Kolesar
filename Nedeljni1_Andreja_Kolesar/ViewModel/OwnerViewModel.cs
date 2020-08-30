@@ -29,7 +29,7 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
             set
             {
                 _adminList = value;
-                OnPropertyChanged("managerList");
+                OnPropertyChanged("adminList");
             }
         }
 
