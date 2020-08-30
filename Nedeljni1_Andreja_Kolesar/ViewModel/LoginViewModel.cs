@@ -118,7 +118,7 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
                         employee.Show();
                         
                     }
-                    else
+                    else if(Service.Service.isManager(user)!=null)
                     {
                         tblManager m = Service.Service.isManager(user);
                         if (m.levelOfResponsibility != null)
