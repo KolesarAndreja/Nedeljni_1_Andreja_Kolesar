@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Nedeljni1_Andreja_Kolesar.View"
         mc:Ignorable="d"
         Title="ManagerAccess"
-        Height="450"
-        Width="800">
+        Height="250"
+        Width="650">
     <Grid>
         <Label Content="Manager Access password:"
                HorizontalAlignment="Left"

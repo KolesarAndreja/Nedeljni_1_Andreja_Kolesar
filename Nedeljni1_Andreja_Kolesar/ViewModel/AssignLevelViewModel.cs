@@ -66,9 +66,17 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
         {
             try
             {
-                Service.Service.AddManager(editManager);
-                isUpdated = true;
-                assign.Close();
+                if (editManager.levelOfResponsibility == "3" || editManager.levelOfResponsibility == "2" || editManager.levelOfResponsibility=="1")
+                {
+                    Service.Service.AddManager(editManager);
+                    isUpdated = true;
+                    assign.Close();
+
+                }
+                else
+                {
+                    MessageBox.Show("Invalid input");
+                }
             }
             catch (Exception ex)
             {
@@ -79,6 +87,7 @@ namespace Nedeljni1_Andreja_Kolesar.ViewModel
         private bool CanSaveExecute()
         {
             return true;
+
         }
         #endregion
     }
